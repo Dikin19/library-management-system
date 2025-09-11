@@ -2,6 +2,8 @@ package com.system.management.library.aplikasi.book.management.entity.management
 
 
 import com.system.management.library.aplikasi.book.management.entity.app.BaseEntity;
+import com.system.management.library.aplikasi.book.management.model.enums.Role;
+import com.system.management.library.aplikasi.book.management.model.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +23,9 @@ import java.time.LocalDateTime;
         @Index(name = "idx_user_created_date", columnList = "createdDate"),
         @Index(name = "idx_user_modified_date", columnList = "modifiedDate"),
         @Index(name = "idx_user_username", columnList = "username"),
-        @Index(name = "idx_user_email", columnList = "email"),
+        @Index(name = "idx_user_password", columnList = "password"),
+        @Index(name = "idx_user_status", columnList = "status"),
+        @Index(name = "idx_user_role", columnList = "role")
 
 })
 public class User extends BaseEntity {
@@ -31,16 +35,18 @@ public class User extends BaseEntity {
     private String id;
 
     @Column(nullable = false, unique = true)
-    private String nama;
-
-    @Column(nullable = false, unique = true)
     private String username;
-
-    @Column(nullable = false, unique = true)
-    private String email;
 
     @Column(nullable = false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
     private String token;
 
