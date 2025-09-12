@@ -57,6 +57,18 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    public SimpleMap findById(String id) {
+        var user = userRepository.findById(id).orElseThrow(
+                () ->  new RuntimeException("Data user tidak ditemukan"));
+        SimpleMap data = new SimpleMap();
+        data.put("id", user.getId());
+        data.put("username", user.getUsername());
+        data.put("email", user.getEmail());
+        data.put("role", user.getRole().getLabel());
+        return data;
+
+    }
+
     private void validasiMandatory(RegisterRequestRecord request) {
 
         if (request.username() == null || request.username().isEmpty()) {

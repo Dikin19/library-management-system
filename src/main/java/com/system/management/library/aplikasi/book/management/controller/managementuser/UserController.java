@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("admin")
 @RequiredArgsConstructor
+//@Tag(name = "Admin API")
 public class UserController {
 
     private final UserService userService;
@@ -29,6 +30,12 @@ public class UserController {
     public BaseResponse<List<SimpleMap>> getAllUsers(){
         List<SimpleMap> users = userService.getAllUsers();
         return BaseResponse.ok("Data berhasil ditampikan", users);
+    }
+
+    @GetMapping("find-by-id/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public BaseResponse<?> findById(@PathVariable String id){
+    return BaseResponse.ok(null, userService.findById(id));
     }
 
 }

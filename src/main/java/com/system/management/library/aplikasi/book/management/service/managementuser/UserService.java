@@ -11,4 +11,6 @@ public interface UserService {
 
     List<SimpleMap> getAllUsers();
 
+    SimpleMap findById(String id);
+
 }
