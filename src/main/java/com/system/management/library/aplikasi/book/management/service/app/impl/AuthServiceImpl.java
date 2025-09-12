@@ -1,6 +1,7 @@
 package com.system.management.library.aplikasi.book.management.service.app.impl;
 
 
+import com.system.management.library.aplikasi.book.management.entity.managementuser.User;
 import com.system.management.library.aplikasi.book.management.mapper.managementuser.UserMapper;
 import com.system.management.library.aplikasi.book.management.model.app.SimpleMap;
 import com.system.management.library.aplikasi.book.management.model.request.LoginRequestRecord;
@@ -61,6 +62,13 @@ public class AuthServiceImpl implements AuthService {
         SimpleMap result = new SimpleMap();
         result.put("token", token);
         return result;
+    }
+
+    @Override
+    public void logout(User userLogout) {
+        userLogout.setToken(null);
+        userLogout.setExpiredTokenAt(null);
+        userRepository.save(userLogout);
     }
 
     private void validasiMandatory(RegisterRequestRecord request) {
