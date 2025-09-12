@@ -17,13 +17,14 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "m_user", indexes = {
-        @Index(name = "idx_user_created_date", columnList = "createdDate"),
-        @Index(name = "idx_user_modified_date", columnList = "modifiedDate"),
-        @Index(name = "idx_user_fullname", columnList = "fullname"),
-        @Index(name = "idx_user_phoneNumber", columnList = "phoneNumber"),
-        @Index(name = "idx_user_address", columnList = "address"),
-        @Index(name = "idx_user_status", columnList = "status"),
+@Table(name = "m_user_profile", indexes = {
+        @Index(name = "idx_user_profile_created_date", columnList = "createdDate"),
+        @Index(name = "idx_user_profile_modified_date", columnList = "modifiedDate"),
+        @Index(name = "idx_user_profile_fullname", columnList = "fullname"),
+        @Index(name = "idx_user_profile_phone", columnList = "phone"),
+        @Index(name = "idx_user_profile_address", columnList = "address"),
+        @Index(name = "idx_user_profile_status", columnList = "status"),
+        @Index(name = "idx_user_profile_user_id", columnList = "user_id"),
 
 })
 public class UserProfile extends BaseEntity {
@@ -36,7 +37,7 @@ public class UserProfile extends BaseEntity {
     private String fullname;
 
     @Column(nullable = false, unique = true)
-    private String phoneNumber;
+    private String phone;
 
     @Column(nullable = false)
     private String address;
@@ -45,8 +46,10 @@ public class UserProfile extends BaseEntity {
     @Column(nullable = false)
     private Status status;
 
-    // kolom user_id mendapatkan user.id dari user untuk pebuatan setiap satu profile satu user.
-    @OneToOne
+    // One-to-One dengan User (1 user hanya memiliki 1 profile)
+    // user_id adalah foreign key yang menunjuk ke tabel user memlalui variable user
+    // kolom user_id mendapatkan user.id dari user untuk pembuatan setiap satu profile satu user.
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
