@@ -42,7 +42,7 @@ public class UserController {
 
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public BaseResponse<Void> deleteUser(@PathVariable String id){
+    public BaseResponse<Void> deleteBook(@PathVariable String id){
         userService.deleteUser(id);
         return BaseResponse.ok("User berhasil dihapus", null);
     }
