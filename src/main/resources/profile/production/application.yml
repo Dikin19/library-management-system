@@ -18,3 +18,15 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   profiles:
     active: production
+
+logging:
+  level:
+    com.sinaukoding.ecommerce: ERROR
+
+springdoc:
+  api-docs:
+    defaultModelsExpandDepth: -1
+    docExpansion: none
+    enabled: false
+    tagsSorter: alpha
+    operationsSorter: alpha

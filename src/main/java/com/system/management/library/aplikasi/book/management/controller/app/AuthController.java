@@ -5,7 +5,7 @@ import com.system.management.library.aplikasi.book.management.model.request.Logi
 import com.system.management.library.aplikasi.book.management.model.request.RegisterRequestRecord;
 import com.system.management.library.aplikasi.book.management.model.response.BaseResponse;
 import com.system.management.library.aplikasi.book.management.service.app.AuthService;
-import com.system.management.library.aplikasi.book.management.service.app.impl.AuthServiceImpl;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("auth")
 @RequiredArgsConstructor
+@Tag(name = "CREATE ADMIN/MEMBER API")
 public class AuthController {
 
     private final AuthService authService;

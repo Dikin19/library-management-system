@@ -4,6 +4,7 @@ import com.system.management.library.aplikasi.book.management.model.app.SimpleMa
 import com.system.management.library.aplikasi.book.management.model.request.RegisterRequestRecord;
 import com.system.management.library.aplikasi.book.management.model.response.BaseResponse;
 import com.system.management.library.aplikasi.book.management.service.managementuser.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("admin")
 @RequiredArgsConstructor
-//@Tag(name = "Admin API")
+@Tag(name = "Admin API")
 public class UserController {
 
     private final UserService userService;
