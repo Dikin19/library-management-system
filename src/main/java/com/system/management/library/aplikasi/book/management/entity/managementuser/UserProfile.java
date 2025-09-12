@@ -2,7 +2,7 @@ package com.system.management.library.aplikasi.book.management.entity.management
 
 
 import com.system.management.library.aplikasi.book.management.entity.app.BaseEntity;
-import com.system.management.library.aplikasi.book.management.model.enums.Role;
+import com.system.management.library.aplikasi.book.management.model.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -21,36 +20,34 @@ import java.time.LocalDateTime;
 @Table(name = "m_user", indexes = {
         @Index(name = "idx_user_created_date", columnList = "createdDate"),
         @Index(name = "idx_user_modified_date", columnList = "modifiedDate"),
-        @Index(name = "idx_user_username", columnList = "username"),
-        @Index(name = "idx_user_password", columnList = "password"),
-        @Index(name = "idx_user_role", columnList = "role")
+        @Index(name = "idx_user_fullname", columnList = "fullname"),
+        @Index(name = "idx_user_phoneNumber", columnList = "phoneNumber"),
+        @Index(name = "idx_user_address", columnList = "address"),
+        @Index(name = "idx_user_status", columnList = "status"),
 
 })
-public class User extends BaseEntity {
+public class UserProfile extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String fullname;
+
+    @Column(nullable = false, unique = true)
+    private String phoneNumber;
 
     @Column(nullable = false)
-    private String password;
+    private String address;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    private Status status;
 
-    private String token;
-
-    private LocalDateTime expiredTokenAt;
-
-    // One-to-One dengan UserProfile adalah setiap user hanya mempunyai satu userProfile
-    // user adalah primaryKey user_id yang berada di table userProfile untuk relasi one-to-one ini.
-    // user menjadi one to one di ke profile ditandai akses dengan private UserProfile profile;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private UserProfile profile;
-
+    // kolom user_id mendapatkan user.id dari user untuk pebuatan setiap satu profile satu user.
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

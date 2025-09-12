@@ -5,8 +5,14 @@ import lombok.Getter;
 @Getter
 public enum Status {
 
-    STUDENT_ACTIVE("Mahasiswa Aktif"),
-    GRADUATED("Alumni");
+    // cara menampilkan di di FE
+    // status.name() (BORROWED)
+    // status.getLabel() (Sedang dipinjam).
+    // Dan untuk didatabase data yang akan tersimpan adalah BORROWED
+
+    BORROWED("Sedang dipinjam"),
+    RETURNED("Sudah dikembalikan"),
+    OVERDUE("Terlambat dikembalikan");
 
     private final String label;
 
