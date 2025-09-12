@@ -71,6 +71,8 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(userLogout);
     }
 
+
+
     private void validasiMandatory(RegisterRequestRecord request) {
 
         if (request.username() == null || request.username().isEmpty()) {
