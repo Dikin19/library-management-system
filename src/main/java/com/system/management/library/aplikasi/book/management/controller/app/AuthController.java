@@ -13,7 +13,7 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public BaseResponse<?> register(@RequestBody RegisterRequestRecord request) {
         authService.register(request);
         return BaseResponse.ok("Data berhasil disimpan", null);
