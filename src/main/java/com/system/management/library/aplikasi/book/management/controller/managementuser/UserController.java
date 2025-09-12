@@ -32,10 +32,18 @@ public class UserController {
         return BaseResponse.ok("Data berhasil ditampikan", users);
     }
 
-    @GetMapping("find-by-id/{id}")
+    @GetMapping("/find-by-id/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public BaseResponse<?> findById(@PathVariable String id){
     return BaseResponse.ok(null, userService.findById(id));
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public BaseResponse<Void> deleteUser(@PathVariable String id){
+        userService.deleteUser(id);
+        return BaseResponse.ok("User berhasil dihapus", null);
     }
 
 }

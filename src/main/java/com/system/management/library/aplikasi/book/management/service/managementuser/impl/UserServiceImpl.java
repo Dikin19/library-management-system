@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
-
+    @Override
     public void update(RegisterRequestRecord request) {
 
         validasiMandatory(request);
@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
     public List<SimpleMap> getAllUsers(){
         List<User> listUser = userRepository.findAll();
 
@@ -57,6 +58,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
     public SimpleMap findById(String id) {
         var user = userRepository.findById(id).orElseThrow(
                 () ->  new RuntimeException("Data user tidak ditemukan"));
@@ -68,6 +70,14 @@ public class UserServiceImpl implements UserService {
         return data;
 
     }
+
+    @Override
+    public void deleteUser(String id){
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("user dengan ID " +id+ "tidak ditemukan"));
+        userRepository.delete(user);
+    }
+
 
     private void validasiMandatory(RegisterRequestRecord request) {
 

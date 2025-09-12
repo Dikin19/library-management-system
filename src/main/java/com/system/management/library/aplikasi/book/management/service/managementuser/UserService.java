@@ -13,4 +13,6 @@ public interface UserService {
 
     SimpleMap findById(String id);
 
+    void deleteUser(String id);
+
 }
