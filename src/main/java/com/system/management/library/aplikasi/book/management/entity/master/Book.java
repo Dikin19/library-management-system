@@ -48,6 +48,21 @@ public class Book extends BaseEntity {
     @Builder.Default
     private List<Loan> loans = new ArrayList<>();
 
+    // Many_to-Many dengan book dan category.
+    // book bisa mempunya banyak category dan category mempunyai banyak book
+    // kita menggunakan joinTable untuk memmbuat table penghubung yang dinamakan book_category
+    // joinColumns menentukan fk untuk entity saat ini yaitu book dan kita buat nama fk nya book_id
+    // inverseJoinColumns menentukan entity lawan yaitu category dan kita buat category_id
+    // kita buat list dari table Category dan variable categories
+    // untuk mappedBy categories di table category
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "book_category",
+            joinColumns = @JoinColumn(name = "book_id"), // FK ke Book
+            inverseJoinColumns = @JoinColumn(name = "category_id") // FK ke Category
+    )
+    @Builder.Default
+    private List<Category> categories = new ArrayList<>();
 
 }
 

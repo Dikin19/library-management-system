@@ -1,17 +1,13 @@
 package com.system.management.library.aplikasi.book.management.entity.master;
 
 import com.system.management.library.aplikasi.book.management.entity.app.BaseEntity;
-import com.system.management.library.aplikasi.book.management.entity.managementuser.User;
-import com.system.management.library.aplikasi.book.management.model.enums.Status;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -20,10 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "m_category", indexes = {
-        @Index(name = "idx_user_created_date", columnList = "createdDate"),
-        @Index(name = "idx_user_modified_date", columnList = "modifiedDate"),
-        @Index(name = "idx_category_name", columnList = "name"),
-        @Index(name = "idx_category_description", columnList = "description")
+        @Index(name = "idx_category_created_date", columnList = "createdDate"),
+        @Index(name = "idx_category_modified_date", columnList = "modifiedDate"),
+        @Index(name = "idx_category_name", columnList = "name")
 
 })
 public class Category extends BaseEntity {
@@ -35,9 +30,11 @@ public class Category extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
-    private String description;
-
-    // Many-to-Many ke Book
+    // Many-to-Many dengan book variable categories harus sama dengan variable list category di table book
+    // books menyimpang category book yang dibuatkan dalam table penghubung book_category.
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<Book> books = new ArrayList<>();
 }
 
 
