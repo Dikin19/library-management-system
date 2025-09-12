@@ -1,12 +1,17 @@
 package com.system.management.library.aplikasi.book.management.service.managementuser.impl;
 
+import com.system.management.library.aplikasi.book.management.entity.managementuser.User;
 import com.system.management.library.aplikasi.book.management.mapper.managementuser.UserMapper;
+import com.system.management.library.aplikasi.book.management.model.app.SimpleMap;
 import com.system.management.library.aplikasi.book.management.model.request.RegisterRequestRecord;
 import com.system.management.library.aplikasi.book.management.repository.managementuser.UserRepository;
 import com.system.management.library.aplikasi.book.management.service.managementuser.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +38,23 @@ public class UserServiceImpl implements UserService {
         user.setId(userExisting.getId());
         user.setPassword(passwordEncoder.encode(request.password()));
         userRepository.save(user);
+    }
+
+    public List<SimpleMap> getAllUsers(){
+        List<User> listUser = userRepository.findAll();
+
+        return listUser.stream().map(user -> {
+            SimpleMap data = new SimpleMap();
+                data.add("id", user.getId());
+                data.add("username", user.getUsername());
+                data.add("email", user.getEmail());
+                data.add("role", user.getRole());
+
+                return data;
+
+        }).collect(Collectors.toList());
+
+
     }
 
     private void validasiMandatory(RegisterRequestRecord request) {
