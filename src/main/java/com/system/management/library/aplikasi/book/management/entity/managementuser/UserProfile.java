@@ -2,6 +2,7 @@ package com.system.management.library.aplikasi.book.management.entity.management
 
 
 import com.system.management.library.aplikasi.book.management.entity.app.BaseEntity;
+import com.system.management.library.aplikasi.book.management.model.enums.Role;
 import com.system.management.library.aplikasi.book.management.model.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -45,6 +46,10 @@ public class UserProfile extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
     // One-to-One dengan User (1 user hanya memiliki 1 profile)
     // user_id adalah foreign key yang menunjuk ke tabel user memlalui variable user

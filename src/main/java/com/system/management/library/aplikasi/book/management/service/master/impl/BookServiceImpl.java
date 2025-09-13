@@ -1,12 +1,10 @@
 package com.system.management.library.aplikasi.book.management.service.master.impl;
 
-import com.system.management.library.aplikasi.book.management.entity.managementuser.User;
 import com.system.management.library.aplikasi.book.management.entity.master.Book;
 import com.system.management.library.aplikasi.book.management.entity.master.Category;
 import com.system.management.library.aplikasi.book.management.mapper.master.BookMapper;
 import com.system.management.library.aplikasi.book.management.model.app.SimpleMap;
 import com.system.management.library.aplikasi.book.management.model.request.BookRequestRecord;
-import com.system.management.library.aplikasi.book.management.model.request.RegisterRequestRecord;
 import com.system.management.library.aplikasi.book.management.repository.master.BookRepository;
 import com.system.management.library.aplikasi.book.management.service.app.ValidatorService;
 import com.system.management.library.aplikasi.book.management.service.master.BookService;

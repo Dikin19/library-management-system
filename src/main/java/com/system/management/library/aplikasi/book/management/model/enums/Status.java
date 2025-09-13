@@ -11,8 +11,7 @@ public enum Status {
     // Dan untuk didatabase data yang akan tersimpan adalah BORROWED
 
     BORROWED("Sedang dipinjam"),
-    RETURNED("Sudah dikembalikan"),
-    OVERDUE("Terlambat dikembalikan");
+    RETURNED("Sudah dikembalikan");
 
     private final String label;
 
