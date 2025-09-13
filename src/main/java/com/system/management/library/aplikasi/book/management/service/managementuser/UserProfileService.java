@@ -6,6 +6,6 @@ public interface UserProfileService {
 
     void create(UserProfileRequestRecord request);
 
-//    void update(UserProfileRequestRecord request);
+    void update(UserProfileRequestRecord request);
 
 }

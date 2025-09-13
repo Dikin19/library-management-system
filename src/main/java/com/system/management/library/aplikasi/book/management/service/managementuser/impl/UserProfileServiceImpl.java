@@ -27,4 +27,21 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     }
 
+    public void update(UserProfileRequestRecord request) {
+
+
+        var userProfileExisting = userProfileRepository.findById(request.id()).orElseThrow(() -> new RuntimeException("Data user tidak ditemukan"));
+
+        if (userProfileRepository.existsByFullnameAndIdNot(request.fullname().toLowerCase(), request.id())) {
+            throw new RuntimeException("fullname [" + request.fullname() + "] sudah digunakan");
+        }
+        if (userProfileRepository.existsByPhoneAndIdNot(request.phone().toLowerCase(), request.id())) {
+            throw new RuntimeException("phone [" + request.phone() + "] sudah digunakan");
+        }
+
+        var userProfile = userProfileMapper.requestToEntity(request);
+        userProfile.setId(userProfileExisting.getId());
+        userProfileRepository.save(userProfile);
+    }
+
 }

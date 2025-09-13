@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record UserProfileRequestRecord(
-
+        String id,
         @NotBlank(message = "Fullname tidak boleh kosong") String fullname,
         @NotBlank(message = "Nomor telephone tidak boleh kosong") String phone,
         @NotBlank(message = "Alamat tidak boleh kosong") String address,

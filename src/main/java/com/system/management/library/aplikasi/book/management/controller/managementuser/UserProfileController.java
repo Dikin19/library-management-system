@@ -20,11 +20,17 @@ public class UserProfileController {
 
     private final UserProfileService userProfileService;
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public BaseResponse<?> create(@RequestBody UserProfileRequestRecord request){
 
         userProfileService.create(request);
-        return BaseResponse.ok("Data berhasil ditambahkan", null);
+        return BaseResponse.ok("Profile berhasil ditambahkan", null);
+    }
+
+    @PostMapping("/update")
+    public BaseResponse<?> update(@RequestBody UserProfileRequestRecord request){
+        userProfileService.update(request);
+        return BaseResponse.ok("Profile berhasil di update", null);
     }
 
 

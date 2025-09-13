@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface UserProfileRepository extends JpaRepository<UserProfile, String>, JpaSpecificationExecutor<UserProfile> {
 
-
+    Boolean existsByFullnameAndIdNot(String fullname, String id);
+    Boolean existsByPhoneAndIdNot(String phone, String id);
 }

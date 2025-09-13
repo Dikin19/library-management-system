@@ -43,7 +43,7 @@ public class BookController {
     @PreAuthorize("hasRole('ADMIN')")
     public BaseResponse<?> update(@RequestBody BookRequestRecord request) {
         bookService.update(request);
-        return BaseResponse.ok("Data berhasil diubah", null);
+        return BaseResponse.ok("Buku berhasil diubah", null);
     }
 
     @DeleteMapping("/delete/{id}")
