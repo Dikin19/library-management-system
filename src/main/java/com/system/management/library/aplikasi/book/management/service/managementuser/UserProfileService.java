@@ -13,5 +13,7 @@ public interface UserProfileService {
 
     List<SimpleMap> getAllProfiles();
 
-//    SimpleMap findById(String Id);
+    SimpleMap findById(String Id);
+
+    void deleteProfile(String id);
 }

@@ -7,6 +7,7 @@ import com.system.management.library.aplikasi.book.management.model.response.Bas
 import com.system.management.library.aplikasi.book.management.service.managementuser.UserProfileService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +38,19 @@ public class UserProfileController {
         List<SimpleMap> profiles = userProfileService.getAllProfiles();
         return BaseResponse.ok("Data berhasil ditampikan", profiles);
     }
+
+    @GetMapping("/find-by-id/{id}")
+    public BaseResponse<?> findById(@PathVariable String id) {
+        return BaseResponse.ok(null, userProfileService.findById(id));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public BaseResponse<Void> deleteProfile(@PathVariable String id){
+        userProfileService.deleteProfile(id);
+        return BaseResponse.ok("Profile berhasil dihapus", null);
+    }
+
+
 
 
 }

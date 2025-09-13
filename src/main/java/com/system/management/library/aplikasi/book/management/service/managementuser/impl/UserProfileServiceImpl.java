@@ -2,8 +2,6 @@ package com.system.management.library.aplikasi.book.management.service.managemen
 
 
 import com.system.management.library.aplikasi.book.management.entity.managementuser.UserProfile;
-import com.system.management.library.aplikasi.book.management.entity.master.Book;
-import com.system.management.library.aplikasi.book.management.entity.master.Category;
 import com.system.management.library.aplikasi.book.management.mapper.managementuser.UserProfileMapper;
 import com.system.management.library.aplikasi.book.management.model.app.SimpleMap;
 import com.system.management.library.aplikasi.book.management.model.request.UserProfileRequestRecord;
@@ -67,6 +65,29 @@ public class UserProfileServiceImpl implements UserProfileService {
 
             return data;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public SimpleMap findById(String id) {
+        var profile = userProfileRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Data book tidak ditemukan"));
+
+        SimpleMap data = new SimpleMap();
+        data.add("id", profile.getId());
+        data.add("fullname", profile.getFullname());
+        data.add("phone", profile.getPhone());
+        data.add("address", profile.getAddress());
+        data.add("status", profile.getStatus());
+        data.add("role", profile.getRole());
+
+        return data;
+    }
+
+    @Override
+    public void deleteProfile(String id){
+        UserProfile profile = userProfileRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Profile dengan ID " +id+ "tidak ditemukan"));
+        userProfileRepository.delete(profile);
     }
 
 }
