@@ -14,7 +14,8 @@ public record LoanRequestResponse(
         String bookTitle,
         LocalDateTime tanggalPinjam,
         LocalDateTime tanggalKembali,
-        Status status
+        Status status,
+        long denda
 ) {
     public static LoanRequestResponse fromEntity(Loan loan) {
         return new LoanRequestResponse(
@@ -25,7 +26,8 @@ public record LoanRequestResponse(
                 loan.getBook().getTitle(),
                 loan.getTanggalPinjam(),
                 loan.getTanggalKembali(),
-                loan.getStatus()
+                loan.getStatus(),
+                loan.getDenda() != null ? loan.getDenda() : 0
         );
     }
 }

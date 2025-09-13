@@ -11,6 +11,7 @@ public record LoanRequestRecord (
         @NotNull(message = "Tanggal peminjaman tidak boleh kosong")LocalDateTime tanggalPinjam,
         LocalDateTime tanggalKembali,
         @NotNull(message = "Status tidak boleh kosong")Status status,
+        long denda,
         @NotBlank(message = "UserId tidak boleh kosong") String userId,
         @NotBlank(message = "BookId tidak boleh kosong")String bookId
 )

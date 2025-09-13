@@ -46,6 +46,9 @@ public class Loan extends BaseEntity {
     @Column(nullable = false)
     private Status status;
 
+    @Column(nullable = true)
+    private Long denda;
+
 
     // Many-to-One dengan User (Loan/peminjamann bisa dilakukan berkali" oleh 1 User)
     // user_id adalah foreign key yang menunjuk ke tabel user memlalui variable member

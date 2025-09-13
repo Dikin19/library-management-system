@@ -18,6 +18,7 @@ public class LoanMapper {
                 .tanggalPinjam(request.tanggalPinjam())
                 .tanggalKembali(request.tanggalKembali())
                 .status(request.status())
+                .denda(request.denda())
                 .member(member)
                 .book(book).build();
     }
