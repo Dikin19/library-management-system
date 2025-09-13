@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("admin")
 @RequiredArgsConstructor
-@Tag(name = "Admin API")
+@Tag(name = "Manage Users")
 public class UserController {
 
     private final UserService userService;

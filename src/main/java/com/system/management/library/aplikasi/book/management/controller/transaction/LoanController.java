@@ -4,6 +4,7 @@ import com.system.management.library.aplikasi.book.management.entity.transaction
 import com.system.management.library.aplikasi.book.management.model.request.LoanRequestRecord;
 import com.system.management.library.aplikasi.book.management.model.request.LoanRequestResponse;
 import com.system.management.library.aplikasi.book.management.service.transaction.LoanService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/loan")
 @RequiredArgsConstructor
+@Tag(name = "Manage Loans")
 public class LoanController {
 
     private final LoanService loanService;

@@ -1,21 +1,20 @@
 package com.system.management.library.aplikasi.book.management.controller.managementuser;
 
 
+import com.system.management.library.aplikasi.book.management.model.app.SimpleMap;
 import com.system.management.library.aplikasi.book.management.model.request.UserProfileRequestRecord;
 import com.system.management.library.aplikasi.book.management.model.response.BaseResponse;
 import com.system.management.library.aplikasi.book.management.service.managementuser.UserProfileService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/profile")
 @RequiredArgsConstructor
-@Tag(name = "Create Profile")
+@Tag(name = "Manage Profile")
 public class UserProfileController {
 
     private final UserProfileService userProfileService;
@@ -31,6 +30,12 @@ public class UserProfileController {
     public BaseResponse<?> update(@RequestBody UserProfileRequestRecord request){
         userProfileService.update(request);
         return BaseResponse.ok("Profile berhasil di update", null);
+    }
+
+    @GetMapping("/find-all")
+    public BaseResponse<List<SimpleMap>> getAllProfiles() {
+        List<SimpleMap> profiles = userProfileService.getAllProfiles();
+        return BaseResponse.ok("Data berhasil ditampikan", profiles);
     }
 
 

@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/book")
 @RequiredArgsConstructor
-@Tag(name = "Book API")
+@Tag(name = "Manage Books")
 public class BookController {
 
     private final BookService bookService;

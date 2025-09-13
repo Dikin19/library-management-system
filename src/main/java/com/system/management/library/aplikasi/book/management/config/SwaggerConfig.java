@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                         email = "muhamad.sodikin@mail.com"
                 ),
                 description = "Swagger documentation for Aplikasi Book management",
-                title = "Swagger Aplikasi Book management",
+                title = "Swagger Aplikasi Book managements",
                 version = "1.0.0",
                 license = @License(
                         name = "Libray Management System",
