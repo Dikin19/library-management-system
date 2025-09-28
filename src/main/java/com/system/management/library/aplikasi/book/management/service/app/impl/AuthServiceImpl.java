@@ -49,16 +49,23 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public SimpleMap login(LoginRequestRecord request) {
+
         validatorService.validator(request);
 
-        var user = userRepository.findByUsername(request.username().toLowerCase()).orElseThrow(() -> new RuntimeException("Username atau password salah"));
+        var user = userRepository.findByUsername(request.username()
+                .toLowerCase()).orElseThrow(() -> new RuntimeException("Username atau password salah"));
+
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
             throw new RuntimeException("Username atau password salah");
         }
+
         String token = jwtUtil.generateToken(user.getUsername());
         user.setToken(token);
+
         user.setExpiredTokenAt(LocalDateTime.now().plusHours(1));
+
         userRepository.save(user);
+
         SimpleMap result = new SimpleMap();
         result.put("token", token);
         return result;
