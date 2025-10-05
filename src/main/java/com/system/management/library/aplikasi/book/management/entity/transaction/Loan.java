@@ -1,7 +1,7 @@
 package com.system.management.library.aplikasi.book.management.entity.transaction;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.system.management.library.aplikasi.book.management.entity.app.BaseEntity;
 import com.system.management.library.aplikasi.book.management.entity.managementuser.User;
 import com.system.management.library.aplikasi.book.management.entity.master.Book;
@@ -55,8 +55,8 @@ public class Loan extends BaseEntity {
     // kolom user_id mendapatkan user.id dari user untuk pembuatan setiap satu user/member memijam buku.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
-    private User member;
+//    @JsonBackReference("user-loan")
+    private User user;
 
 
     // Many-to-One dengan Book (Loan/peminjaman bisa meminjam bekali" untuk 1 Book yang sama)
@@ -64,7 +64,7 @@ public class Loan extends BaseEntity {
     // kolom book_id mendapatkan idbook dari table book untuk pembuatan setiap peminjaman melalui idbook
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id", nullable = false)
-    @JsonIgnore
+//    @JsonBackReference("book-loan")
     private Book book;
 }
 

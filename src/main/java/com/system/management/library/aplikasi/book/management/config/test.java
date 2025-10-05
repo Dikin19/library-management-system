@@ -6,17 +6,12 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
-import java.util.Base64;
 import java.util.Date;
 
 @Component
-public class JwtUtil {
+public class test {
 
-    // gunakan secret tetap, simpan di environment variable / application.properties
-    private static final String SECRET = "your-very-strong-secret-key-for-jwt-256-bit-2025";
-
-    // buat key dari secret di atas
-    private final Key key = Keys.hmacShaKeyFor(Base64.getEncoder().encode(SECRET.getBytes()));
+    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public String generateToken(String username) {
         long expiredOneHour = 1000 * 60 * 60;
@@ -25,7 +20,7 @@ public class JwtUtil {
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiredOneHour))
-                .signWith(key, SignatureAlgorithm.HS256)
+                .signWith(key)
                 .compact();
     }
 
@@ -46,8 +41,8 @@ public class JwtUtil {
                     .parseClaimsJws(token);
             return true;
         } catch (Exception e) {
-            System.out.println("Token validation error: " + e.getMessage());
             return false;
         }
     }
+
 }

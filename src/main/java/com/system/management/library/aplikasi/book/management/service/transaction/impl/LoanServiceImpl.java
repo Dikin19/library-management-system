@@ -6,13 +6,14 @@ import com.system.management.library.aplikasi.book.management.entity.transaction
 import com.system.management.library.aplikasi.book.management.mapper.transaction.LoanMapper;
 import com.system.management.library.aplikasi.book.management.model.enums.Status;
 import com.system.management.library.aplikasi.book.management.model.request.LoanRequestRecord;
-import com.system.management.library.aplikasi.book.management.model.request.LoanRequestResponse;
+import com.system.management.library.aplikasi.book.management.model.response.LoanResponse;
 import com.system.management.library.aplikasi.book.management.repository.managementuser.UserRepository;
 import com.system.management.library.aplikasi.book.management.repository.master.BookRepository;
 import com.system.management.library.aplikasi.book.management.repository.transaction.LoanRepository;
 import com.system.management.library.aplikasi.book.management.service.transaction.LoanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,11 +28,14 @@ public class LoanServiceImpl implements LoanService {
     private final LoanMapper loanMapper;
 
     @Override
+    // data client di kirim dari request controller untuk masuk dalam logicService
+    // ambil data dari user, book, lalu kirim ke loanMapper dan kembalikan di sava dalam userRepository
     public Loan pinjamBuku(LoanRequestRecord request){
 
+        // cari user_id yang mewakilkan fk dari user
         User user = userRepository.findById(request.userId()).
                 orElseThrow(()-> new RuntimeException("user tidak ditemukan"));
-
+        // cari book_id yang mewakilkan fk dari book
         Book book = bookRepository.findById(request.bookId()).
                 orElseThrow(()-> new RuntimeException("buku tidak ditemukan"));
 
@@ -54,11 +58,15 @@ public class LoanServiceImpl implements LoanService {
         loan.setStatus(Status.RETURNED);
 
         LocalDateTime batasTanggalKembaliBuku = loan.getTanggalPinjam().plusDays(7);
+
         if (loan.getTanggalKembali().isAfter(batasTanggalKembaliBuku)){
+
             long hariTerlambat = java.time.Duration
                     .between(batasTanggalKembaliBuku, loan.getTanggalKembali())
                     .toDays();
+
             long denda = hariTerlambat * 1000;
+
             System.out.println("total denda keterlambatan " +hariTerlambat+ " * " + "1000");
             loan.setDenda(denda);
         }
@@ -68,10 +76,9 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public List<LoanRequestResponse> getAllLoans(){
+    public List<LoanResponse> getAllLoans(){
         List<Loan> loans = loanRepository.findAll();
-
-        return loans.stream().map(LoanRequestResponse::fromEntity).toList();
+        return loans.stream().map(loanMapper::toResponse).toList();
     }
 
 

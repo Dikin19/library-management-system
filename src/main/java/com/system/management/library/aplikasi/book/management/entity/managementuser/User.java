@@ -1,6 +1,8 @@
 package com.system.management.library.aplikasi.book.management.entity.managementuser;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.system.management.library.aplikasi.book.management.entity.app.BaseEntity;
 import com.system.management.library.aplikasi.book.management.entity.transaction.Loan;
 import com.system.management.library.aplikasi.book.management.model.enums.Role;
@@ -57,8 +59,9 @@ public class User extends BaseEntity {
     // maapedBy = "member" harus sama dengan variable yang dibuat didalam table Loan.
     // member menjadi one-to-many di table Loan ditandai dengan private List<Loan> loans.
     // List<Loan> untuk menampung 1 user/member yang mempunyai banyak record peminjaman.
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member", orphanRemoval = true,  fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true,  fetch = FetchType.LAZY)
     @Builder.Default
+//    @JsonManagedReference("user-loan")
     private List<Loan> loans = new ArrayList<>();
 
     private String token;

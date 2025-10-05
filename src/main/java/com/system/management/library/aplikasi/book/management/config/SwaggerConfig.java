@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 
+// link http://localhost:8080/swagger-ui/index.html#/
 @OpenAPIDefinition(
         info = @Info(
                 contact = @Contact(

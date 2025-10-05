@@ -3,6 +3,7 @@ package com.system.management.library.aplikasi.book.management;
 import com.system.management.library.aplikasi.book.management.model.enums.Status;
 import com.system.management.library.aplikasi.book.management.model.request.LoanRequestRecord;
 import com.system.management.library.aplikasi.book.management.model.request.LoanRequestResponse;
+import com.system.management.library.aplikasi.book.management.model.response.LoanResponse;
 import com.system.management.library.aplikasi.book.management.service.transaction.LoanService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +54,9 @@ public class LoanServiceTest {
 
     @Test
     void testGetAllLoans() {
-        List<LoanRequestResponse> loans = loanService.getAllLoans();
+        List<LoanResponse> loans = loanService.getAllLoans();
         System.out.println("Jumlah peminjaman: " + loans.size());
-        for (LoanRequestResponse l : loans) {
+        for (LoanResponse l : loans) {
             System.out.println(l);
         }
     }

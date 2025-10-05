@@ -1,5 +1,7 @@
 package com.system.management.library.aplikasi.book.management.entity.master;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.system.management.library.aplikasi.book.management.entity.app.BaseEntity;
 import com.system.management.library.aplikasi.book.management.entity.transaction.Loan;
 import jakarta.persistence.*;
@@ -46,6 +48,7 @@ public class Book extends BaseEntity {
     // List<Loan> untuk menampung one book yang dipinjam berkali".
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book", orphanRemoval = true,  fetch = FetchType.LAZY)
     @Builder.Default
+//    @JsonManagedReference("book-loan") // gunakan value unik
     private List<Loan> loans = new ArrayList<>();
 
     // Many_to-Many dengan book dan category.
