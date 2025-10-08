@@ -75,3 +75,7 @@
 2025-10-08_17:23:59.663 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
 2025-10-08_17:23:59.705 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
 2025-10-08_17:23:59.725 [main] INFO  c.s.m.l.a.book.management.MainApp - Started MainApp in 15.032 seconds (process running for 17.371)
+2025-10-08_17:29:23.292 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-08_17:29:23.292 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-10-08_17:29:23.296 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2025-10-08_17:29:24.996 [http-nio-8080-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 1081 ms

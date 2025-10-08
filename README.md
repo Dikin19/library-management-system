@@ -41,6 +41,11 @@ Aplikasi sudah menyediakan akun default untuk setiap role, yang bisa digunakan s
 }
 ```
 
+## 📊 Flowchart Sistem
+
+![Flowchart Library Management System](./LibraryManagementSystem.png)
+
+
 ## Fitur
 
 ### Authentication & Authorization
