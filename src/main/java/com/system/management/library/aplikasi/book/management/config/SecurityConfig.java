@@ -22,12 +22,14 @@ public class SecurityConfig {
     private final AccessDeniedConfig accessDeniedConfig;
     private final AuthenticationEntryPointConfig authenticationEntryPointConfig;
 
+//  "/loan/pinjam-buku", "/loan/kembalikan-buku"
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login/**", "/auth/register", "/loan/pinjam-buku", "/loan/kembalikan-buku").permitAll()
+                        .requestMatchers("/auth/login/**", "/auth/register").permitAll()
                         .requestMatchers("/v2/api-docs", "/v3/api-docs", "/v3/api-docs/**", "/swagger-resources", "/swagger-resources/**",
                                 "/configuration/ui", "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated()
