@@ -16,8 +16,7 @@ Library Management System adalah aplikasi berbasis Spring Boot 3 dengan PostgreS
 - **JUnit 5 & Mockito**
 
 ## Dokumentasi API
-
-- **Postman Collection**: [Library Management System - Postman](#)
+ 
 - **Swagger UI**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
 ## User Akses untuk Testing
