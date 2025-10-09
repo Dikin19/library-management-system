@@ -2,7 +2,6 @@ package com.system.management.library.aplikasi.book.management;
 
 import com.system.management.library.aplikasi.book.management.model.enums.Status;
 import com.system.management.library.aplikasi.book.management.model.request.LoanRequestRecord;
-import com.system.management.library.aplikasi.book.management.model.request.LoanRequestResponse;
 import com.system.management.library.aplikasi.book.management.model.response.LoanResponse;
 import com.system.management.library.aplikasi.book.management.service.transaction.LoanService;
 import org.junit.jupiter.api.Test;
