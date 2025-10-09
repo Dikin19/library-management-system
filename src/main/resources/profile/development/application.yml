@@ -1,19 +1,53 @@
+#server:
+#  port: 8080
+#
+#spring:
+#  datasource:
+##    url: jdbc:postgresql://localhost:5432/LibraryManagementSystem
+#    url: jdbc:postgresql://host.docker.internal:5432/LibraryManagementSystem
+#    username: postgres
+#    password: postgres
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
+#        enable_lazy_load_no_trans: true
+#    database: postgresql
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#  profiles:
+#    active: development
+#
+#logging:
+#  level:
+#    com.sinaukoding.ecommerce: TRACE
+#
+#springdoc:
+#  api-docs:
+#    enabled: true
+#  swagger-ui:
+#    defaultModelsExpandDepth: -1
+#    docExpansion: none
+#    tagsSorter: alpha
+#    operationsSorter: alpha
+
 server:
   port: 8080
 
 spring:
   datasource:
-#    url: jdbc:postgresql://localhost:5432/LibraryManagementSystem
-    url: jdbc:postgresql://host.docker.internal:5432/LibraryManagementSystem
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/LibraryManagementSystem}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+    show-sql: ${SPRING_JPA_SHOW_SQL:true}
     properties:
       hibernate:
-        format_sql: true
+        format_sql: ${SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL:true}
         enable_lazy_load_no_trans: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -22,7 +56,7 @@ spring:
 
 logging:
   level:
-    com.sinaukoding.ecommerce: TRACE
+    com.system.management.library: TRACE
 
 springdoc:
   api-docs:
@@ -32,3 +66,4 @@ springdoc:
     docExpansion: none
     tagsSorter: alpha
     operationsSorter: alpha
+
