@@ -4,7 +4,8 @@ server:
 spring:
   datasource:
 #    url: jdbc:postgresql://localhost:5432/LibraryManagementSystem
-    url: jdbc:postgresql://host.docker.internal:5432/LibraryManagementSystem
+#    url: jdbc:postgresql://host.docker.internal:5432/LibraryManagementSystem
+    url: jdbc:postgresql://db:5432/LibraryManagementSystem
     username: postgres
     password: postgres
   jpa:
