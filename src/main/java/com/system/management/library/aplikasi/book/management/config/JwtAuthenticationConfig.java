@@ -31,7 +31,8 @@ public class JwtAuthenticationConfig extends OncePerRequestFilter {
 
         // || path.equals("/loan/pinjam-buku")|| path.equals("/loan/kembalikan-buku")
 
-        if (path.startsWith("/auth/login") || path.equals("/auth/register")){
+        if (path.startsWith("/auth/login") || path.equals("/auth/register") || path.equals("/api")
+        || path.equals("/api-docs")){
             filterChain.doFilter(request, response);
             return;
         }
