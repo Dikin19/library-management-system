@@ -34,7 +34,9 @@ logging:
 springdoc:
   api-docs:
     enabled: true
+    path: /api-docs
   swagger-ui:
+    path: /api
     defaultModelsExpandDepth: -1
     docExpansion: none
     tagsSorter: alpha
