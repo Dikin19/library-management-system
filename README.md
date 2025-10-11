@@ -1,29 +1,143 @@
-# Library Management System
+# 📚 Library Management System
 
-Library Management System adalah aplikasi berbasis Spring Boot 3 dengan PostgreSQL sebagai database utama. Aplikasi ini sudah mendukung JWT Authentication untuk proses login, dilengkapi dengan role-based access (Admin dan Member), serta menerapkan security, validasi data, dan unit test untuk menjaga keamanan serta kualitas aplikasi.
+> Sistem manajemen perpustakaan modern yang dibangun dengan Spring Boot 3, dilengkapi dengan JWT Authentication, role-based authorization, dan RESTful API yang lengkap.
 
-## Teknologi & Dependencies
+## 🎯 **Deskripsi Aplikasi**
 
-- **Java 21**
-- **Spring Boot 3.5.5**
-- **Maven 3.6+**
-- **Spring Web, Spring Data JPA, Spring Security, Validation**
-- **PostgreSQL Driver**
-- **Lombok**
-- **JWT (jjwt-api, jjwt-impl, jjwt-jackson)**
-- **SpringDoc OpenAPI (Swagger UI)**
-- **Commons Lang3**
-- **JUnit 5 & Mockito**
+Library Management System adalah aplikasi web untuk mengelola perpustakaan digital yang memungkinkan administrator dan anggota untuk mengelola buku, peminjaman, dan profil pengguna dengan sistem keamanan yang baik. Aplikasi ini dirancang dengan arsitektur yang scalable dan menggunakan teknologi terkini.
 
-## Dokumentasi API
- 
-- **Swagger UI**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+### ✨ **Fitur Utama**
 
-## User Akses untuk Testing
+🔐 **Authentication & Authorization**
 
-Aplikasi sudah menyediakan akun default untuk setiap role, yang bisa digunakan saat uji coba:
+- Login/Register dengan JWT Token
+- Role-based access control (Admin & Member)
+- Session management yang aman
 
-### Admin
+👤 **User Management**
+
+- Manajemen profil pengguna
+- Sistem role dan permission
+- Data validation yang ketat
+
+📖 **Book Management**
+
+- CRUD operations untuk buku
+- Kategori dan pencarian buku
+- Inventory management
+
+📋 **Loan Management**
+
+- Sistem peminjaman buku
+- Tracking status peminjaman
+- History peminjaman pengguna
+
+🛡️ **Security Features**
+
+- JWT-based authentication
+- Password encryption dengan BCrypt
+- CORS configuration untuk deployment
+- Input validation dan sanitization
+
+## 🚀 **Demo & Screenshots**
+
+### 📊 **Sistem Architecture**
+
+![Library Management System Architecture](./LibraryManagementSystem.png)
+
+### 🗄️ **Database Schema**
+
+![Database ERD](./LibraryManagementSystem-EDR.png)
+
+## 🛠️ **Tech Stack**
+
+### **Backend**
+
+- **Java 21** - Programming language
+- **Spring Boot 3.5.5** - Application framework
+- **Spring Security** - Security framework
+- **Spring Data JPA** - Data persistence
+- **PostgreSQL** - Primary database
+- **Maven** - Dependency management
+
+### **Authentication & Authorization**
+
+- **JWT (jjwt)** - Token-based authentication
+- **BCrypt** - Password hashing
+
+### **Documentation & Testing**
+
+- **SpringDoc OpenAPI** - API documentation (Swagger)
+- **JUnit 5** - Unit testing
+- **Mockito** - Mocking framework
+
+### **Utilities**
+
+- **Lombok** - Reduce boilerplate code
+- **Commons Lang3** - Utility functions
+- **Logback** - Logging framework
+
+## 📋 **Prerequisites**
+
+Pastikan Anda memiliki tools berikut terinstall:
+
+- ☕ **Java 21** atau lebih baru
+- 🔧 **Maven 3.6+**
+- 🐘 **PostgreSQL 15+**
+- 🎯 **Git** (untuk clone repository)
+
+## ⚡ **Quick Start**
+
+### 1️⃣ **Clone Repository**
+
+```bash
+git clone https://github.com/Dikin19/library-management-system.git
+cd library-management-system
+```
+
+### 2️⃣ **Setup Database**
+
+```sql
+-- Buat database baru
+CREATE DATABASE LibraryManagementSystem;
+
+-- Buat user (optional)
+CREATE USER library_user WITH PASSWORD 'library_password';
+GRANT ALL PRIVILEGES ON DATABASE LibraryManagementSystem TO library_user;
+```
+
+### 3️⃣ **Konfigurasi Database**
+
+Edit file `src/main/resources/profile/development/application.yml`:
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/LibraryManagementSystem
+    username: postgres # sesuaikan dengan username Anda
+    password: postgres # sesuaikan dengan password Anda
+```
+
+### 4️⃣ **Install Dependencies & Run**
+
+```bash
+# Install dependencies
+mvn clean install
+
+# Jalankan aplikasi
+mvn spring-boot:run
+```
+
+### 5️⃣ **Akses Aplikasi**
+
+- 📖 **Swagger UI**: `https://library.msodikin.web.id/swagger-ui/index.html#`
+- 📊 **API Docs**: `https://library.msodikin.web.id/api-docs`
+
+## 👥 **Default Users untuk Testing**
+
+Aplikasi sudah menyediakan akun default untuk testing:
+
+### 🔑 **Admin Account**
 
 ```json
 {
@@ -32,7 +146,7 @@ Aplikasi sudah menyediakan akun default untuk setiap role, yang bisa digunakan s
 }
 ```
 
-### Member
+### 👤 **Member Account**
 
 ```json
 {
@@ -41,190 +155,250 @@ Aplikasi sudah menyediakan akun default untuk setiap role, yang bisa digunakan s
 }
 ```
 
-## 📊 Flowchart Sistem
+## 🎭 **User Roles & Permissions**
 
-![Flowchart Library Management System](./LibraryManagementSystem.png)
+### 👑 **Admin Role**
 
+Memiliki akses penuh ke sistem dengan kemampuan:
 
-## Fitur
+- 🏢 **User Management**
 
-### Authentication & Authorization
+  - ✅ Mengelola semua user member (Create, Read, Update, Delete)
+  - ✅ Melihat daftar semua pengguna
+  - ✅ Mengubah status dan role pengguna
 
-- Login menggunakan JWT
-- Hak akses berdasarkan role (Admin, Member)
+- 📚 **Book Management**
 
-### Admin
+  - ✅ Menambahkan buku baru ke perpustakaan
+  - ✅ Mengupdate informasi buku
+  - ✅ Menghapus buku dari sistem
+  - ✅ Melihat seluruh koleksi buku
 
-- Mengelola user member (CRUD)
-- Mengelola buku (CRUD)
-- Mengelola profile user (CRUD)
-- Melihat seluruh peminjaman buku
-- Mengelola pengembalian buku
+- 📋 **Loan Management**
 
-### Member
+  - ✅ Melihat semua transaksi peminjaman
+  - ✅ Approve/reject peminjaman
+  - ✅ Mengelola pengembalian buku
+  - ✅ Generate laporan peminjaman
 
-- Meminjam buku
-- Melihat riwayat peminjaman
-- Mengelola profile pribadi
+- 👤 **Profile Management**
+  - ✅ Mengelola profile semua user
+  - ✅ Update informasi user lain
 
-## Konfigurasi Database
+### 🎓 **Member Role**
 
-Aplikasi menggunakan PostgreSQL. Untuk development, konfigurasi database dapat ditemukan di:
+Akses terbatas untuk pengguna umum dengan kemampuan:
 
-`src/main/resources/profile/development/application.yml`
+- 📖 **Book Access**
 
-```yaml
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/LibraryManagementSystem
-    username: postgres
-    password: postgres
+  - ✅ Melihat daftar buku tersedia
+  - ✅ Mencari buku berdasarkan kriteria
+  - ✅ Melihat detail informasi buku
+
+- 📋 **Personal Loan Management**
+
+  - ✅ Meminjam buku yang tersedia
+  - ✅ Melihat riwayat peminjaman pribadi
+  - ✅ Check status peminjaman aktif
+
+- 👤 **Personal Profile**
+  - ✅ Mengelola profile pribadi
+  - ✅ Update informasi personal
+
+## 🛣️ **API Endpoints**
+
+### 🔐 **Authentication Endpoints**
+
+```http
+POST   /auth/register          # Register pengguna baru
+POST   /auth/login             # Login dan dapatkan JWT token
+GET    /auth/logout            # Logout dan invalidate token
 ```
 
-## Instalasi & Menjalankan Aplikasi
+### 👥 **Admin Management (Admin Only)**
 
-### Prerequisites
+```http
+POST   /admin/update           # Update data user
+GET    /admin/find-all         # Dapatkan semua user
+GET    /admin/find-by-id/{id}  # Dapatkan user berdasarkan ID
+DELETE /admin/delete/{id}      # Hapus user
+```
 
-- Java 21
-- Maven 3.6+
-- PostgreSQL
+### 📚 **Book Management**
 
-### Langkah Instalasi
+```http
+POST   /book/create            # Tambah buku baru (Admin only)
+PUT    /book/update            # Update buku (Admin only)
+GET    /book/find-all          # Dapatkan semua buku (Public)
+GET    /book/find-by-id/{id}   # Dapatkan buku berdasarkan ID (Public)
+DELETE /book/delete/{id}       # Hapus buku (Admin only)
+```
 
-1. **Clone repository**
+### 📋 **Loan Management**
 
-   ```bash
-   git clone https://github.com/Dikin19/library-management-system.git
-   cd aplikasi.book.management
-   ```
+```http
+POST   /loan/pinjam-buku              # Pinjam buku (Member)
+POST   /loan/kembalikan-buku/{loanId} # Kembalikan buku (Admin)
+GET    /loan/find-all                 # Dapatkan semua peminjaman (Admin)
+```
 
-2. **Setup Database**
+### 👤 **Profile Management**
 
-   - Pastikan PostgreSQL sudah terinstall dan berjalan
-   - Buat database baru dengan nama `LibraryManagementSystem`
+```http
+POST   /profile/create         # Buat profile baru
+POST   /profile/update         # Update profile
+GET    /profile/find-all       # Dapatkan semua profile
+GET    /profile/find-by-id/{id} # Dapatkan profile berdasarkan ID
+DELETE /profile/delete/{id}    # Hapus profile
+```
 
-   ```sql
-   CREATE DATABASE LibraryManagementSystem;
-   ```
-
-3. **Konfigurasi Database**
-
-   - Update konfigurasi database di `src/main/resources/profile/development/application.yml`
-   - Sesuaikan username dan password PostgreSQL
-
-4. **Install Dependencies**
-
-   ```bash
-   mvn clean install
-   ```
-
-5. **Jalankan Aplikasi**
-
-   ```bash
-   mvn spring-boot:run
-   ```
-
-6. **Akses Aplikasi**
-   - API Base URL: `http://localhost:8080`
-   - Swagger UI: `http://localhost:8080/swagger-ui/index.html`
-
-
-## Configuration Databse BY PostgreSQL
-
-![Flowchart Library Management System](./LibraryManagementSystem-EDR.png)
-
-## Profile Environment
-
-Aplikasi mendukung multiple environment:
-
-- **Development**: `src/main/resources/profile/development/`
-- **Staging**: `src/main/resources/profile/staging/`
-- **Production**: `src/main/resources/profile/production/`
-
-Untuk menjalankan dengan profile tertentu:
+### 🎯 **Menjalankan dengan Profile Tertentu**
 
 ```bash
+# Development
+mvn spring-boot:run
+
+# Staging
 mvn spring-boot:run -Dspring-boot.run.profiles=staging
+
+# Production
+mvn spring-boot:run -Dspring-boot.run.profiles=production
 ```
 
-## Endpoint API
+## 🔒 **Security Implementation**
 
-### Authentication
+### 🛡️ **JWT Authentication**
 
-- `POST /auth/register` - Register user baru
-- `POST /auth/login` - Login user
-- `GET /auth/logout` - Logout user
+- **Token Duration**: 1 jam
+- **Algorithm**: HS256
+- **Header Format**: `Authorization: Bearer <token>`
 
-### Admin Management (Admin Only)
+### 🔐 **Password Security**
 
-- `POST /admin/update` - Update user
-- `GET /admin/find-all` - Get semua user
-- `GET /admin/find-by-id/{id}` - Get user by ID
-- `DELETE /admin/delete/{id}` - Delete user
+- **Hashing**: BCrypt dengan salt rounds
+- **Validation**: Minimum requirements enforced
 
-### Book Management (Admin Only)
+### 🌐 **CORS Configuration**
 
-- `POST /book/create` - Tambah buku baru
-- `PUT /book/update` - Update buku
-- `GET /book/find-all` - Get semua buku (Public)
-- `GET /book/find-by-id/{id}` - Get buku by ID (Public)
-- `DELETE /book/delete/{id}` - Delete buku
+```java
+// Mendukung cross-origin requests untuk deployment
+@CrossOrigin(origins = "*")
+// Atau konfigurasi global di CorsConfig.java
+```
 
-### Loan Management
+## 🚀 **Deployment Guide**
 
-- `POST /loan/pinjam-buku` - Pinjam buku (Public)
-- `POST /loan/kembalikan-buku/{loanId}` - Kembalikan buku (Admin Only)
-- `GET /loan/find-all` - Get semua peminjaman (Admin Only)
+### 🐳 **Docker Deployment**
 
-### Profile Management
+```dockerfile
+# Dockerfile tersedia untuk containerization
+FROM openjdk:21-jdk-slim
+COPY target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app.jar"]
+```
 
-- `POST /profile/create` - Buat profile baru
-- `POST /profile/update` - Update profile
-- `GET /profile/find-all` - Get semua profile
-- `GET /profile/find-by-id/{id}` - Get profile by ID
-- `DELETE /profile/delete/{id}` - Delete profile
+```bash
+# Build dan run dengan Docker
+docker build -t library-management-system .
+docker run -p 8080:8080 library-management-system
+```
 
-## Security Features
+### ☁️ **Cloud Deployment**
 
-- **JWT Authentication**: Token-based authentication dengan expired time 1 jam
-- **Role-based Authorization**: Menggunakan `@PreAuthorize` annotation
-- **Password Encryption**: BCrypt password encoding
-- **Input Validation**: Bean validation untuk request validation
-- **CORS Configuration**: Configured untuk cross-origin requests
+Aplikasi sudah dikonfigurasi untuk deployment di:
+- **Render**
 
-## Logging
+Custome domain :
+- **Cloudflare**
 
-Aplikasi menggunakan Logback untuk logging dengan konfigurasi:
+## 🔧 **Troubleshooting**
 
-- **Development**: Console dan file logging
-- **Production**: File logging dengan rotation
+### ❌ **Common Issues & Solutions**
 
-Log files location: `logs/`
+#### 🗄️ **Database Connection Error**
 
-## Troubleshooting
+```
+Error: Could not connect to PostgreSQL
+```
 
-### Common Issues
+**Solution:**
 
-1. **Database Connection Error**
+1. Pastikan PostgreSQL service running
+2. Check database credentials di `application.yml`
+3. Pastikan database `LibraryManagementSystem` sudah dibuat
+4. Test koneksi dengan: `psql -h localhost -U postgres -d LibraryManagementSystem`
 
-   - Pastikan PostgreSQL service sudah berjalan
-   - Periksa konfigurasi database di application.yml
-   - Pastikan database sudah dibuat
+#### 🔑 **JWT Token Error**
 
-2. **JWT Token Error**
+```
+Error: JWT token expired or invalid
+```
 
-   - Periksa apakah token masih valid (belum expired)
-   - Pastikan format header Authorization: `Bearer <token>`
+**Solution:**
 
-3. **Permission Denied**
+1. Login ulang untuk mendapatkan token baru
+2. Pastikan format header: `Authorization: Bearer <token>`
+3. Check token expiration (1 jam default)
 
-   - Pastikan user memiliki role yang sesuai untuk mengakses endpoint
-   - Periksa annotation `@PreAuthorize` pada controller
+#### 🚫 **Permission Denied**
+
+```
+Error: Access Denied
+```
+
+**Solution:**
+
+1. Pastikan user login dengan role yang sesuai
+2. Check endpoint requirements (Admin/Member only)
+3. Verify JWT token masih valid
+
+#### 🌐 **CORS Error**
+
+```
+Error: CORS policy blocked
+```
+
+**Solution:**
+
+1. Aplikasi sudah dikonfigurasi CORS untuk semua origin
+2. Pastikan menggunakan HTTP/HTTPS schema
+3. Check browser developer tools untuk detail error
+
+#### 📖 **API Testing**
+
+1. **Swagger UI**: Paling mudah untuk testing interaktif
 
 
-### Development Tips
+## 🤝 **Contributing**
 
-- Gunakan Swagger UI untuk testing API
-- Periksa log di `logs/` folder untuk debugging
-- Gunakan profile development untuk debugging dengan show-sql: true
-- Unit test harus pass sebelum commit code
+### 📋 **Development Workflow**
+
+1. Fork repository
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open Pull Request
+
+
+## 👨‍💻 **Authors & Contributors**
+
+- **Dikin19** - _Initial work_ - [GitHub Profile](https://github.com/Dikin19)
+
+## 🙏 **Acknowledgments**
+
+- Spring Boot team untuk framework yang excellent
+- PostgreSQL community untuk database yang robust
+- JWT.io untuk authentication standards
+- OpenAPI untuk API documentation standards
+
+---
+
+<div align="center">
+
+**📚 Made with ❤️ for Library Management**
+
+[![GitHub stars](https://img.shields.io/github/stars/Dikin19/library-management-system.svg?style=social&label=Star)](https://github.com/Dikin19/library-management-system)
+[![GitHub forks](https://img.shields.io/github/forks/Dikin19/library-management-system.svg?style=social&label=Fork)](https://github.com/Dikin19/library-management-system/fork)
+
+</div>
