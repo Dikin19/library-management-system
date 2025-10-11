@@ -12,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @RequiredArgsConstructor
@@ -21,12 +23,14 @@ public class SecurityConfig {
     private final JwtAuthenticationConfig jwtAuthenticationConfig;
     private final AccessDeniedConfig accessDeniedConfig;
     private final AuthenticationEntryPointConfig authenticationEntryPointConfig;
+    private final CorsFilter corsFilter;
 
 //  "/loan/pinjam-buku", "/loan/kembalikan-buku"
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors(cors -> cors.disable()) // Disable Spring Security CORS to use our custom CorsFilter
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(
@@ -50,6 +54,7 @@ public class SecurityConfig {
                         .authenticationEntryPoint(authenticationEntryPointConfig)
                         .accessDeniedHandler(accessDeniedConfig)
                 )
+                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthenticationConfig, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
