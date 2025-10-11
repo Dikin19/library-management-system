@@ -29,9 +29,20 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login/**", "/auth/register", "/api-docs", "/docs**").permitAll()
-                        .requestMatchers("/v2/api-docs", "/v3/api-docs", "/v3/api-docs/**", "/swagger-resources", "/swagger-resources/**",
-                                "/configuration/ui", "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html").permitAll()
+                                .requestMatchers(
+                                        "/auth/login/**",
+                                        "/auth/register",
+                                        "/v3/api-docs/**",
+                                        "/swagger-ui/**",
+                                        "/swagger-ui.html",
+                                        "/docs",
+                                        "/webjars/**",
+                                        "/configuration/ui",
+                                        "/configuration/security"
+                                ).permitAll()
+//                        .requestMatchers("/auth/login/**", "/auth/register", "/api-docs", "/docs**").permitAll()
+//                        .requestMatchers("/v2/api-docs", "/v3/api-docs", "/v3/api-docs/**", "/swagger-resources", "/swagger-resources/**",
+//                                "/configuration/ui", "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex
