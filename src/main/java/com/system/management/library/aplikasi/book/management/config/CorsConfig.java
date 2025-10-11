@@ -31,6 +31,3 @@ public class CorsConfig {
         return new CorsFilter(source);
     }
 }
-        return new CorsFilter(source);
-    }
-}
