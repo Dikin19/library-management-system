@@ -32,11 +32,12 @@ logging:
     com.sinaukoding.ecommerce: TRACE
 
 springdoc:
+  api-docs:
+    path: /api-docs
   swagger-ui:
-    path: /
+    path: /swagger-ui.html
     defaultModelsExpandDepth: -1
     docExpansion: none
     tagsSorter: alpha
     operationsSorter: alpha
-  api-docs:
-    path: /api-docs
+
