@@ -16,7 +16,7 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         
-        // Menggunakan allowedOriginPatterns untuk mendukung deployment yang fleksibel
+        // Menggunakan allowedOriginPatterns untuk mendukung semua origin dengan credentials
         config.setAllowedOriginPatterns(List.of("*"));
         config.setAllowCredentials(true); // Enable credentials untuk JWT
         config.setAllowedHeaders(Arrays.asList("*"));
