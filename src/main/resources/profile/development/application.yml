@@ -36,6 +36,8 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /
+    url: https://library.msodikin.web.id/api-docs
+    disable-swagger-default-url: true
     defaultModelsExpandDepth: -1
     docExpansion: none
     tagsSorter: alpha
