@@ -30,13 +30,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> cors.disable()) // Disable Spring Security CORS to use our custom CorsFilter
+                .cors(cors -> cors.disable()) // Use our custom CorsFilter
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(
                                         "/",
-                                        "/auth/login/**",
-                                        "/auth/register",
+                                        "/auth/**",
                                         "/api-docs/**",
                                         "/v3/api-docs/**",
                                         "/swagger-ui/**",
@@ -45,9 +44,6 @@ public class SecurityConfig {
                                         "/configuration/ui",
                                         "/configuration/security"
                                 ).permitAll()
-//                        .requestMatchers("/auth/login/**", "/auth/register", "/api-docs", "/docs**").permitAll()
-//                        .requestMatchers("/v2/api-docs", "/v3/api-docs", "/v3/api-docs/**", "/swagger-resources", "/swagger-resources/**",
-//                                "/configuration/ui", "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex

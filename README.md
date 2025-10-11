@@ -23,8 +23,6 @@ Library Management System adalah aplikasi web untuk mengelola perpustakaan digit
 📖 **Book Management**
 
 - CRUD operations untuk buku
-- Kategori dan pencarian buku
-- Inventory management
 
 📋 **Loan Management**
 
@@ -37,7 +35,7 @@ Library Management System adalah aplikasi web untuk mengelola perpustakaan digit
 - JWT-based authentication
 - Password encryption dengan BCrypt
 - CORS configuration untuk deployment
-- Input validation dan sanitization
+- Input validation
 
 ## 🚀 **Demo & Screenshots**
 
@@ -68,13 +66,10 @@ Library Management System adalah aplikasi web untuk mengelola perpustakaan digit
 ### **Documentation & Testing**
 
 - **SpringDoc OpenAPI** - API documentation (Swagger)
-- **JUnit 5** - Unit testing
-- **Mockito** - Mocking framework
 
 ### **Utilities**
 
 - **Lombok** - Reduce boilerplate code
-- **Commons Lang3** - Utility functions
 - **Logback** - Logging framework
 
 ## 📋 **Prerequisites**

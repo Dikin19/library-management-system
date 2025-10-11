@@ -7,7 +7,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 
 @Configuration
 public class CorsConfig {
@@ -16,18 +16,21 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         
-        // Untuk development dan testing - izinkan semua origin
-        config.setAllowCredentials(false); // Set ke false karena menggunakan * untuk origin
-        config.setAllowedOrigins(Collections.singletonList("*")); // Menggunakan allowedOrigins dengan *
+        // Menggunakan allowedOriginPatterns untuk mendukung deployment yang fleksibel
+        config.setAllowedOriginPatterns(List.of("*"));
+        config.setAllowCredentials(true); // Enable credentials untuk JWT
         config.setAllowedHeaders(Arrays.asList("*"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD"));
         config.setMaxAge(3600L); // cache preflight response
         
         // Tambahkan exposed headers untuk response
-        config.setExposedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        config.setExposedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type", "Access-Control-Allow-Origin"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
+}
         return new CorsFilter(source);
     }
 }
