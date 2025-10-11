@@ -13,12 +13,13 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("https://library.msodikin.web.id", "http://library.msodikin.web.id")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
+                registry.addMapping("/**") // semua endpoint
+                        .allowedOrigins("*") // izinkan semua origin
+                        .allowedMethods("*") // izinkan semua metode HTTP
+                        .allowedHeaders("*") // izinkan semua header
+                        .allowCredentials(false); // harus false kalau pakai allowedOrigins("*")
             }
         };
     }
 }
+    
