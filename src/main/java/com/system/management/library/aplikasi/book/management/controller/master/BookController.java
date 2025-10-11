@@ -16,6 +16,7 @@ import java.util.List;
 @RequestMapping("/book")
 @RequiredArgsConstructor
 @Tag(name = "Manage Books")
+@CrossOrigin(origins = "*")
 public class BookController {
 
     private final BookService bookService;

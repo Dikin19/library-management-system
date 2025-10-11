@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("admin")
 @RequiredArgsConstructor
 @Tag(name = "Manage Users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;

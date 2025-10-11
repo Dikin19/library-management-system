@@ -18,6 +18,7 @@ import java.util.List;
 @RequestMapping("/loan")
 @RequiredArgsConstructor
 @Tag(name = "Manage Loans")
+@CrossOrigin(origins = "*")
 public class LoanController {
 
     private final LoanService loanService;

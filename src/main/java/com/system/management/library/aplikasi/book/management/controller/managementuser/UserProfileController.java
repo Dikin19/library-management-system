@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/profile")
 @RequiredArgsConstructor
 @Tag(name = "Manage Profile")
+@CrossOrigin(origins = "*")
 public class UserProfileController {
 
     private final UserProfileService userProfileService;

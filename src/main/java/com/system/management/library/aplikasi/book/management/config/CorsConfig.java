@@ -15,9 +15,10 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true); // jika ingin kirim cookie/token
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://library.msodikin.web.id"));
+        // Mengizinkan semua origin untuk deploy
+        config.setAllowedOriginPatterns(Arrays.asList("*"));
         config.setAllowedHeaders(Arrays.asList("*"));
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD"));
         config.setMaxAge(3600L); // cache preflight response
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
