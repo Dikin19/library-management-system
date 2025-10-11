@@ -130,8 +130,8 @@ mvn spring-boot:run
 
 ### 5️⃣ **Akses Aplikasi**
 
-- 📖 **Swagger UI**: `https://library.msodikin.web.id/swagger-ui/index.html#`
-- 📊 **API Docs**: `https://library.msodikin.web.id/api-docs`
+- 📖 **Swagger UI**: [https://library.msodikin.web.id/swagger-ui/index.html#](https://library.msodikin.web.id/swagger-ui/index.html#)
+- 📊 **API Docs**: [https://library.msodikin.web.id/api-docs](https://library.msodikin.web.id/api-docs)
 
 ## 👥 **Default Users untuk Testing**
 
@@ -307,9 +307,11 @@ docker run -p 8080:8080 library-management-system
 ### ☁️ **Cloud Deployment**
 
 Aplikasi sudah dikonfigurasi untuk deployment di:
+
 - **Render**
 
 Custome domain :
+
 - **Cloudflare**
 
 ## 🔧 **Troubleshooting**
@@ -369,7 +371,6 @@ Error: CORS policy blocked
 
 1. **Swagger UI**: Paling mudah untuk testing interaktif
 
-
 ## 🤝 **Contributing**
 
 ### 📋 **Development Workflow**
@@ -379,7 +380,6 @@ Error: CORS policy blocked
 3. Commit changes: `git commit -m 'Add amazing feature'`
 4. Push to branch: `git push origin feature/amazing-feature`
 5. Open Pull Request
-
 
 ## 👨‍💻 **Authors & Contributors**
 
