@@ -9,22 +9,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-    show-sql: false
+    show-sql: true
     properties:
       hibernate:
-        format_sql: false
+        format_sql: true
         enable_lazy_load_no_trans: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   profiles:
     active: production
-
-# CORS Configuration for Production
-cors:
-  allowed-origins: "*"
-  allowed-methods: "*"
-  allowed-headers: "*"
-  allow-credentials: true
 
 logging:
   level:
@@ -34,6 +27,6 @@ springdoc:
   api-docs:
     defaultModelsExpandDepth: -1
     docExpansion: none
-    enabled: true  # Enable untuk production agar Swagger tetap bisa diakses
+    enabled: false
     tagsSorter: alpha
     operationsSorter: alpha

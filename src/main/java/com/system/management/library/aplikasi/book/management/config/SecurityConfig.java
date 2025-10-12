@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration
@@ -29,12 +30,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> cors.disable()) // Use our custom CorsFilter
+                .cors(cors -> cors.disable()) // Disable Spring Security CORS to use our custom CorsFilter
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(
                                         "/",
-                                        "/auth/**",
+                                        "/auth/login/**",
+                                        "/auth/register",
                                         "/api-docs/**",
                                         "/v3/api-docs/**",
                                         "/swagger-ui/**",
@@ -43,6 +45,9 @@ public class SecurityConfig {
                                         "/configuration/ui",
                                         "/configuration/security"
                                 ).permitAll()
+//                        .requestMatchers("/auth/login/**", "/auth/register", "/api-docs", "/docs**").permitAll()
+//                        .requestMatchers("/v2/api-docs", "/v3/api-docs", "/v3/api-docs/**", "/swagger-resources", "/swagger-resources/**",
+//                                "/configuration/ui", "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex
