@@ -3,17 +3,21 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://dpg-d3jnfo1r0fns738d6vf0-a.singapore-postgres.render.com:5432/library_management_db_tap8
+    #    url: jdbc:postgresql://localhost:5432/LibraryManagementSystem #posgreSQL
+    #    url: jdbc:postgresql://host.docker.internal:5432/LibraryManagementSystem #docker
+    url: jdbc:postgresql://dpg-d3jnfo1r0fns738d6vf0-a.Singapore-postgres.render.com:5432/library_management_db_tap8
     username: library_management_db_tap8_user
+    #    username: postgres
+    #    password: postgres
     password: p1hNVseLs9RHLCwOjSRZoKx0ymS97pDV
-    hikari:
-      data-source-properties:
-        ssl: true
-        sslmode: require
+  #    hikari:
+  #      data-source-properties:
+  #        ssl: true
+  #        sslmode: require
   jpa:
     hibernate:
-      ddl-auto: validate
-    show-sql: false
+      ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
@@ -25,16 +29,19 @@ spring:
 
 logging:
   level:
-    com.sinaukoding.ecommerce: ERROR
+    com.sinaukoding.ecommerce: TRACE
 
 springdoc:
   api-docs:
+    enable: true
     path: /v3/api-docs
   swagger-ui:
-    path: /
-    url: /v3/api-docs
-    disable-swagger-default-url: true
+    enabled: true
+    path: /swagger-ui.html
     defaultModelsExpandDepth: -1
     docExpansion: none
     tagsSorter: alpha
     operationsSorter: alpha
+    disable-swagger-default-url: false
+  packages-to-scan: com.system.management.library.aplikasi.book.management.controller
+  paths-to-match: /**
