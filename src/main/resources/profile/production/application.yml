@@ -37,7 +37,7 @@ spring:
       path: /api-docs                        # ubah jadi /api-docs biar lebih rapi
     swagger-ui:
       enabled: ${SWAGGER_ENABLED:true}
-      path: /swagger-ui/index.html                # endpoint UI utama
+      path: /                # endpoint UI utama
       url: /api-docs                         # Swagger langsung ambil /api-docs tanpa isi manual
       display-request-duration: true         # opsional, tampilkan waktu respon tiap request
     packages-to-scan: com.system.management.library
