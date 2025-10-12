@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    group:
+      development: profile/development
+      staging: profile/staging
+      production: profile/production
