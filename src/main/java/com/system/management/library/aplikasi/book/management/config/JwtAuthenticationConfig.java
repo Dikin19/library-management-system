@@ -37,6 +37,7 @@ public class JwtAuthenticationConfig extends OncePerRequestFilter {
                 path.startsWith("/auth/login") ||
                 path.equals("/auth/register") ||
                 path.startsWith("/api-docs") ||
+                path.startsWith("/admin/find-all") ||
                 path.startsWith("/v3/api-docs") ||
                 path.startsWith("/swagger-ui") ||
                 path.equals("/swagger-ui.html") ||

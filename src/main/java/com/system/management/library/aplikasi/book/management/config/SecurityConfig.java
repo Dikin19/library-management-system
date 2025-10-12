@@ -37,6 +37,7 @@ public class SecurityConfig {
                                         "/",
                                         "/auth/login/**",
                                         "/auth/register",
+                                        "/admin/find-all",
                                         "/api-docs",
                                         "/api-docs/**",
                                         "/v3/api-docs/**",
