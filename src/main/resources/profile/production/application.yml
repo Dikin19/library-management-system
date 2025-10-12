@@ -27,21 +27,19 @@ spring:
   profiles:
     active: production
 
-logging:
-  level:
-    com.sinaukoding.ecommerce: TRACE
+#logging:
+#  level:
+#    com.sinaukoding.ecommerce: TRACE
 
-springdoc:
-  api-docs:
-    enable: true
-    path: /v3/api-docs
-  swagger-ui:
-    enabled: true
-    path: /swagger-ui.html
-    defaultModelsExpandDepth: -1
-    docExpansion: none
-    tagsSorter: alpha
-    operationsSorter: alpha
-    disable-swagger-default-url: false
-  packages-to-scan: com.system.management.library.aplikasi.book.management.controller
-  paths-to-match: /**
+  springdoc:
+    api-docs:
+      enabled: ${SWAGGER_ENABLED:true}       # aktif hanya jika SWAGGER_ENABLED=true
+      path: /api-docs                        # ubah jadi /api-docs biar lebih rapi
+    swagger-ui:
+      enabled: ${SWAGGER_ENABLED:true}
+      path: /swagger-ui.html                 # endpoint UI utama
+      url: /api-docs                         # Swagger langsung ambil /api-docs tanpa isi manual
+      display-request-duration: true         # opsional, tampilkan waktu respon tiap request
+    packages-to-scan: com.system.management.library
+    paths-to-match: /**
+

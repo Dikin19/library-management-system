@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 version = "1.0.0",
                 license = @License(
                         name = "Libray Management System",
-                        url = "https://sinaukoding.co.id/"
+                        url = "https://www.msodikin.web.id/"
                 ),
                 termsOfService = "Terms of service"
         ),
@@ -32,8 +32,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
                         url = "http://localhost:8080/"
                 ),
                 @Server(
-                        description = "Staging",
-                        url = "http://localhost:8080/"
+                        description = "Production",
+                        url = "https://library.msodikin.web.id/"
                 )
         },
         security = {

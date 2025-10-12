@@ -27,9 +27,9 @@ spring:
   profiles:
     active: development
 
-logging:
-  level:
-    com.sinaukoding.ecommerce: TRACE
+#logging:
+#  level:
+#    com.sinaukoding.ecommerce: TRACE
 
 springdoc:
   api-docs:
