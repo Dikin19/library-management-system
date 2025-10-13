@@ -48,7 +48,7 @@ public class Book extends BaseEntity {
     // List<Loan> untuk menampung one book yang dipinjam berkali".
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book", orphanRemoval = true,  fetch = FetchType.LAZY)
     @Builder.Default
-//    @JsonManagedReference("book-loan") // gunakan value unik
+    @JsonIgnore // Prevent infinite loop during JSON serialization
     private List<Loan> loans = new ArrayList<>();
 
     // Many_to-Many dengan book dan category.

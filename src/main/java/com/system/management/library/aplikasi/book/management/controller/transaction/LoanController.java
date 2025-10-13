@@ -5,6 +5,7 @@ import com.system.management.library.aplikasi.book.management.mapper.transaction
 import com.system.management.library.aplikasi.book.management.model.request.LoanRequestRecord;
 import com.system.management.library.aplikasi.book.management.model.response.LoanResponse;
 import com.system.management.library.aplikasi.book.management.service.transaction.LoanService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/loan")
 @RequiredArgsConstructor
 @Tag(name = "Manage Loans")
-@CrossOrigin(origins = "*")
 public class LoanController {
 
     private final LoanService loanService;

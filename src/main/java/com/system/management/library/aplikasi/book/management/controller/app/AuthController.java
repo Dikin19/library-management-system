@@ -10,11 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("auth")
 @RequiredArgsConstructor
 @Tag(name = "Manage Authentications")
-@CrossOrigin(origins = "*")
 public class AuthController {
 
     private final AuthService authService;

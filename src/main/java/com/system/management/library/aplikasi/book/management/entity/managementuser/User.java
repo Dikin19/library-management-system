@@ -61,7 +61,7 @@ public class User extends BaseEntity {
     // List<Loan> untuk menampung 1 user/member yang mempunyai banyak record peminjaman.
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true,  fetch = FetchType.LAZY)
     @Builder.Default
-//    @JsonManagedReference("user-loan")
+    @JsonIgnore // Prevent infinite loop during JSON serialization
     private List<Loan> loans = new ArrayList<>();
 
     private String token;

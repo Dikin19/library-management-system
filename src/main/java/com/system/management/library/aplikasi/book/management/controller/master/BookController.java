@@ -5,6 +5,7 @@ import com.system.management.library.aplikasi.book.management.model.app.SimpleMa
 import com.system.management.library.aplikasi.book.management.model.request.BookRequestRecord;
 import com.system.management.library.aplikasi.book.management.model.response.BaseResponse;
 import com.system.management.library.aplikasi.book.management.service.master.BookService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,11 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/book")
 @RequiredArgsConstructor
 @Tag(name = "Manage Books")
-@CrossOrigin(origins = "*")
 public class BookController {
 
     private final BookService bookService;

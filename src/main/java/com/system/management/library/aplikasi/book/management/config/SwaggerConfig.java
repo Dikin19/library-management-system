@@ -9,8 +9,15 @@ import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.Components;
+import org.springdoc.core.models.GroupedOpenApi;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-// link http://localhost:8080/swagger-ui/index.html#/
+
+@Configuration
+// link http://localhost:8080/swagger-ui.html
 @OpenAPIDefinition(
         info = @Info(
                 contact = @Contact(
@@ -51,4 +58,21 @@ import io.swagger.v3.oas.annotations.servers.Server;
         in = SecuritySchemeIn.HEADER
 )
 public class SwaggerConfig {
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .components(new Components()
+                        // Menghilangkan schemas dengan tidak menambahkan components
+                );
+    }
+
+    @Bean
+    public GroupedOpenApi publicApi() {
+        return GroupedOpenApi.builder()
+                .group("public")
+                .pathsToMatch("/**")
+                .packagesToScan("com.system.management.library")
+                .build();
+    }
 }

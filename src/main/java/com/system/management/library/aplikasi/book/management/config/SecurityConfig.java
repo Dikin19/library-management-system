@@ -12,8 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @RequiredArgsConstructor
@@ -23,43 +21,58 @@ public class SecurityConfig {
     private final JwtAuthenticationConfig jwtAuthenticationConfig;
     private final AccessDeniedConfig accessDeniedConfig;
     private final AuthenticationEntryPointConfig authenticationEntryPointConfig;
-    private final CorsFilter corsFilter;
-
-//  "/loan/pinjam-buku", "/loan/kembalikan-buku"
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> cors.disable()) // Disable Spring Security CORS to use our custom CorsFilter
+                // ✅ Enable CORS dengan custom CorsFilter
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers(
-                                        "/",
-                                        "/auth/login/**",
-                                        "/auth/register",
-                                        "/admin/find-all",
-                                        "/api-docs",
-                                        "/api-docs/**",
-                                        "/v3/api-docs/**",
-                                        "/swagger-ui/**",
-                                        "/swagger-ui.html",
-                                        "/webjars/**",
-                                        "/configuration/ui",
-                                        "/configuration/security"
-                                ).permitAll()
-//                        .requestMatchers("/auth/login/**", "/auth/register", "/api-docs", "/docs**").permitAll()
-//                        .requestMatchers("/v2/api-docs", "/v3/api-docs", "/v3/api-docs/**", "/swagger-resources", "/swagger-resources/**",
-//                                "/configuration/ui", "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html").permitAll()
+                        .requestMatchers(
+                                "/",
+                                "/auth/login/**",
+                                "/auth/register",
+
+                                // ✅ Swagger UI & OpenAPI (semua versi)
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**",
+                                "/v3/api-docs",
+                                "/api-docs/**",
+                                "/api-docs",
+                                "/swagger-resources/**",
+                                "/webjars/**",
+                                "/configuration/ui",
+                                "/configuration/security"
+                        ).permitAll()
+
+                        // ✅ Semua route lain butuh autentikasi JWT
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint(authenticationEntryPointConfig)
                         .accessDeniedHandler(accessDeniedConfig)
                 )
-                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+
+                // ✅ Tambahkan filter JWT authentication
                 .addFilterBefore(jwtAuthenticationConfig, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+    }
+
+    private org.springframework.web.cors.CorsConfigurationSource corsConfigurationSource() {
+        org.springframework.web.cors.CorsConfiguration configuration = new org.springframework.web.cors.CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.addAllowedOriginPattern("*"); // Gunakan pattern untuk production
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        configuration.setMaxAge(3600L);
+        
+        org.springframework.web.cors.UrlBasedCorsConfigurationSource source = 
+            new org.springframework.web.cors.UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean
@@ -71,5 +84,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

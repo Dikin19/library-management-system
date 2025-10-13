@@ -27,19 +27,28 @@ spring:
   profiles:
     active: production
 
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:your-very-strong-secret-key-for-jwt-256-bit-2025-production}
+  expiration: ${JWT_EXPIRATION:3600000} # 1 hour in milliseconds
+
 #logging:
 #  level:
 #    com.sinaukoding.ecommerce: TRACE
 
-  springdoc:
-    api-docs:
-      enabled: ${SWAGGER_ENABLED:true}       # aktif hanya jika SWAGGER_ENABLED=true
-      path: /api-docs                        # ubah jadi /api-docs biar lebih rapi
-    swagger-ui:
-      enabled: ${SWAGGER_ENABLED:true}
-      path: /swagger-ui.html                # endpoint UI utama
-      url: /api-docs                         # Swagger langsung ambil /api-docs tanpa isi manual
-      display-request-duration: true         # opsional, tampilkan waktu respon tiap request
-    packages-to-scan: com.system.management.library
-    paths-to-match: /**
-
+springdoc:
+  api-docs:
+    enabled: ${SWAGGER_ENABLED:true}       # aktif hanya jika SWAGGER_ENABLED=true
+    path: /api-docs                        # ubah jadi /api-docs biar lebih rapi
+  swagger-ui:
+    enabled: ${SWAGGER_ENABLED:true}
+    path: /swagger-ui.html                # endpoint UI utama
+    url: /api-docs                         # Swagger langsung ambil /api-docs tanpa isi manual
+    display-request-duration: true         # opsional, tampilkan waktu respon tiap request
+    defaultModelsExpandDepth: -1          # Sembunyikan schemas
+    defaultModelExpandDepth: -1           # Sembunyikan model details
+    showExtensions: false                 # Hilangkan extensions
+    docExpansion: none                    # Collapse semua sections
+    custom-css-path: /swagger-ui-custom.css # Custom CSS untuk hide schemas
+  packages-to-scan: com.system.management.library
+  paths-to-match: /**

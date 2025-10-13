@@ -7,6 +7,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +23,8 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationConfig extends OncePerRequestFilter {
 
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationConfig.class);
+
     private final JwtUtil jwtUtil;
     private final UserLoggedInServiceImpl userService;
 
@@ -29,20 +33,17 @@ public class JwtAuthenticationConfig extends OncePerRequestFilter {
 
         String path = request.getServletPath();
 
-        // || path.equals("/loan/pinjam-buku")|| path.equals("/loan/kembalikan-buku")
-//        if (path.startsWith("/auth/login") || path.equals("/auth/register") || path.equals("/docs")
-//        || path.equals("/api-docs"))
-
+        // Skip JWT validation untuk endpoint public
         if (path.equals("/") ||
                 path.startsWith("/auth/login") ||
                 path.equals("/auth/register") ||
                 path.startsWith("/api-docs") ||
-                path.startsWith("/admin/find-all") ||
                 path.startsWith("/v3/api-docs") ||
                 path.startsWith("/swagger-ui") ||
                 path.equals("/swagger-ui.html") ||
                 path.startsWith("/webjars") ||
-                path.startsWith("/configuration")) {
+                path.startsWith("/configuration") ||
+                path.startsWith("/swagger-resources")) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -51,22 +52,33 @@ public class JwtAuthenticationConfig extends OncePerRequestFilter {
         String username = null;
         String jwt = null;
 
+        // Extract JWT token from Authorization header
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             jwt = authHeader.substring(7);
-            username = jwtUtil.extractUsername(jwt);
+            try {
+                username = jwtUtil.extractUsername(jwt);
+            } catch (Exception e) {
+                logger.error("Error extracting username from JWT: " + e.getMessage());
+            }
         }
 
+        // Validate JWT and set authentication context
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userService.loadUserByUsername(username);
+            try {
+                UserDetails userDetails = this.userService.loadUserByUsername(username);
 
-            if (jwtUtil.validateToken(jwt)) {
-                UsernamePasswordAuthenticationToken authToken =
-                        new UsernamePasswordAuthenticationToken(
-                                userDetails, null, userDetails.getAuthorities());
+                if (jwtUtil.validateToken(jwt)) {
+                    UsernamePasswordAuthenticationToken authToken =
+                            new UsernamePasswordAuthenticationToken(
+                                    userDetails, null, userDetails.getAuthorities());
 
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                } else {
+                    logger.warn("Invalid JWT token for user: " + username);
+                }
+            } catch (Exception e) {
+                logger.error("Error during authentication: " + e.getMessage());
             }
         }
 

@@ -1,5 +1,6 @@
 package com.system.management.library.aplikasi.book.management.entity.master;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.system.management.library.aplikasi.book.management.entity.app.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,6 +35,7 @@ public class Category extends BaseEntity {
     // books menyimpang category book yang dibuatkan dalam table penghubung book_category.
     @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     @Builder.Default
+    @JsonIgnore // Prevent infinite loop during JSON serialization
     private List<Book> books = new ArrayList<>();
 }
 

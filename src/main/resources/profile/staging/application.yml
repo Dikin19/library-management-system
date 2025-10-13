@@ -19,12 +19,10 @@ spring:
   profiles:
     active: staging
 
-# CORS Configuration for Staging
-cors:
-  allowed-origins: "*"
-  allowed-methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-  allowed-headers: "*"
-  allow-credentials: true
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:your-very-strong-secret-key-for-jwt-256-bit-2025-staging}
+  expiration: ${JWT_EXPIRATION:3600000} # 1 hour in milliseconds
 
 logging:
   level:
@@ -32,8 +30,16 @@ logging:
 
 springdoc:
   api-docs:
-    defaultModelsExpandDepth: -1
-    docExpansion: none
+    path: /api-docs
     enabled: true
-    tagsSorter: alpha
-    operationsSorter: alpha
+  swagger-ui:
+    path: /swagger-ui.html
+    url: /api-docs
+    display-request-duration: true
+    defaultModelsExpandDepth: -1          # Sembunyikan schemas
+    defaultModelExpandDepth: -1           # Sembunyikan model details
+    showExtensions: false                 # Hilangkan extensions
+    docExpansion: none                    # Collapse semua sections
+    custom-css-path: /swagger-ui-custom.css # Custom CSS untuk hide schemas
+  packages-to-scan: com.system.management.library
+  paths-to-match: /**
