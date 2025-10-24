@@ -11,6 +11,7 @@ import com.system.management.library.aplikasi.book.management.service.app.AuthSe
 import com.system.management.library.aplikasi.book.management.service.app.ValidatorService;
 import com.system.management.library.aplikasi.book.management.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
@@ -43,6 +45,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         var user = userMapper.requestToEntity(request);
+
         user.setPassword(passwordEncoder.encode(request.password()));
         userRepository.save(user);
     }
@@ -50,21 +53,31 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public SimpleMap login(LoginRequestRecord request) {
 
+        log.trace("Masuk ke menu login");
+        log.debug("Request login: {}", request);
+
         validatorService.validator(request);
 
         var user = userRepository.findByUsername(request.username()
                 .toLowerCase()).orElseThrow(() -> new RuntimeException("Username atau password salah"));
 
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
+
+            log.warn("Password tidak cocok untuk username: {}", request.username());
+
             throw new RuntimeException("Username atau password salah");
         }
 
         String token = jwtUtil.generateToken(user.getUsername());
+
+        // masukan token yang sudah di generate
         user.setToken(token);
 
         user.setExpiredTokenAt(LocalDateTime.now().plusHours(1));
 
         userRepository.save(user);
+
+        log.info("User {} berhasil login. Token dibuat: {}", user.getUsername(), token);
 
         SimpleMap result = new SimpleMap();
         result.put("token", token);

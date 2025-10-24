@@ -51,7 +51,7 @@ public class Loan extends BaseEntity {
 
 
     // Many-to-One dengan User (Loan/peminjamann bisa dilakukan berkali" oleh 1 User)
-    // user_id adalah foreign key yang menunjuk ke tabel user memlalui variable member
+    // user_id adalah foreign key yang menunjuk ke tabel user memlalui variable user
     // kolom user_id mendapatkan user.id dari user untuk pembuatan setiap satu user/member memijam buku.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

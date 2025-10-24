@@ -6,7 +6,7 @@
 .swagger-ui section.models,
 .models-section,
 .model-container {
-    display: none !important;
+  display: none !important;
 }
 
 /* Untuk versi terbaru Swagger UI 5.x */
@@ -14,7 +14,7 @@
 .swagger-ui .model-box,
 .swagger-ui .model-toggle,
 .swagger-ui .models-wrapper {
-    display: none !important;
+  display: none !important;
 }
 
 /* Menyembunyikan bagian Schemas di bawah */
@@ -24,7 +24,7 @@ section[id="models"],
 .model,
 .model-example,
 .models-control {
-    display: none !important;
+  display: none !important;
 }
 
 /* Target yang lebih spesifik */
@@ -32,17 +32,17 @@ div[class*="models"],
 div[class*="schema"],
 .opblock-section-header h4:contains("Schemas"),
 .opblock-section-header h4:contains("Models") {
-    display: none !important;
+  display: none !important;
 }
 
 /* Jika menggunakan class name yang lebih modern */
 .swagger-ui .info .title + div,
 .swagger-ui .scheme-container + div,
 .swagger-ui .info + section {
-    display: none !important;
+  display: none !important;
 }
 
 /* Hide components section completely */
 .components-section {
-    display: none !important;
+  display: none !important;
 }

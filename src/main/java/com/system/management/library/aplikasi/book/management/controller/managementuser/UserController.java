@@ -23,7 +23,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/update")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')") // userLoggedinConfig
     public BaseResponse<?> edit(@RequestBody RegisterRequestRecord request) {
         userService.update(request);
         return BaseResponse.ok("Data berhasil diubah", null);
@@ -39,7 +39,7 @@ public class UserController {
     @GetMapping("/find-by-id/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public BaseResponse<?> findById(@PathVariable String id){
-    return BaseResponse.ok(null, userService.findById(id));
+        return BaseResponse.ok(null, userService.findById(id));
     }
 
 

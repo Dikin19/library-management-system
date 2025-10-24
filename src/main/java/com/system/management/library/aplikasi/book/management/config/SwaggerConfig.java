@@ -58,21 +58,20 @@ import org.springframework.context.annotation.Configuration;
         in = SecuritySchemeIn.HEADER
 )
 public class SwaggerConfig {
+//    @Bean
+//    public OpenAPI customOpenAPI() {
+//        return new OpenAPI()
+//                .components(new Components()
+//                        // Menghilangkan schemas dengan tidak menambahkan components
+//                );
+//    }
 
-    @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .components(new Components()
-                        // Menghilangkan schemas dengan tidak menambahkan components
-                );
-    }
-
-    @Bean
-    public GroupedOpenApi publicApi() {
-        return GroupedOpenApi.builder()
-                .group("public")
-                .pathsToMatch("/**")
-                .packagesToScan("com.system.management.library")
-                .build();
-    }
+//    @Bean
+//    public GroupedOpenApi publicApi() {
+//        return GroupedOpenApi.builder()
+//                .group("public")
+//                .pathsToMatch("/**")
+//                .packagesToScan("com.system.management.library")
+//                .build();
+//    }
 }

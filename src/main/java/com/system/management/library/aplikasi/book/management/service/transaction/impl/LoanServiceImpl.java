@@ -70,9 +70,7 @@ public class LoanServiceImpl implements LoanService {
             System.out.println("total denda keterlambatan " +hariTerlambat+ " * " + "1000");
             loan.setDenda(denda);
         }
-
         return loanRepository.save(loan);
-
     }
 
     @Override

@@ -20,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
 @Table(name = "m_user", indexes = {
         @Index(name = "idx_user_created_date", columnList = "createdDate"),
         @Index(name = "idx_user_modified_date", columnList = "modifiedDate"),
@@ -28,7 +29,10 @@ import java.util.List;
         @Index(name = "idx_user_role", columnList = "role")
 
 })
+
 public class User extends BaseEntity {
+
+    // data private bisa manipulasi dengan get set
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -56,7 +60,7 @@ public class User extends BaseEntity {
 
     // One-to-many dengan Loan adalah 1 member/user bisa meminjam banyak buku dan akan di record dalam tabel loan atau peminjaman
     // member untuk menandakan dan mengisi value primaryKey user_id yang berada di table loan/peminjaman untuk relasi one-to-many ini.
-    // maapedBy = "member" harus sama dengan variable yang dibuat didalam table Loan.
+    // maapedBy = "user" harus sama dengan variable yang dibuat didalam table Loan.
     // member menjadi one-to-many di table Loan ditandai dengan private List<Loan> loans.
     // List<Loan> untuk menampung 1 user/member yang mempunyai banyak record peminjaman.
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true,  fetch = FetchType.LAZY)

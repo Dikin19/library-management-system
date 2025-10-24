@@ -10,10 +10,6 @@ spring:
     #    username: postgres
     #    password: postgres
     password: p1hNVseLs9RHLCwOjSRZoKx0ymS97pDV
-  #    hikari:
-  #      data-source-properties:
-  #        ssl: true
-  #        sslmode: require
   jpa:
     hibernate:
       ddl-auto: update
@@ -27,26 +23,22 @@ spring:
   profiles:
     active: development
 
-# JWT Configuration
 jwt:
   secret: ${JWT_SECRET:your-very-strong-secret-key-for-jwt-256-bit-2025-development}
   expiration: ${JWT_EXPIRATION:3600000} # 1 hour in milliseconds
 
-#logging:
-#  level:
-#    com.sinaukoding.ecommerce: TRACE
+logging:
+  level:
+    com.system.management.library.aplikasi.book.management: TRACE
 
 springdoc:
   api-docs:
     path: /api-docs
+    enabled: true
   swagger-ui:
     path: /swagger-ui.html
     url: /api-docs
-    display-request-duration: true
-    defaultModelsExpandDepth: -1          # Sembunyikan schemas
-    defaultModelExpandDepth: -1           # Sembunyikan model details
-    showExtensions: false                 # Hilangkan extensions
-    docExpansion: none                    # Collapse semua sections
-    custom-css-path: /swagger-ui-custom.css # Custom CSS untuk hide schemas
-  packages-to-scan: com.system.management.library
-  paths-to-match: /**
+    defaultModelsExpandDepth: -1
+    docExpansion: none
+    tagsSorter: alpha
+    operationsSorter: alpha

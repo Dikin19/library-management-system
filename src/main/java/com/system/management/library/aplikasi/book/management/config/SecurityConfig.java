@@ -25,7 +25,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // ✅ Enable CORS dengan custom CorsFilter
+                // Enable CORS dengan custom CorsFilter
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
@@ -34,7 +34,6 @@ public class SecurityConfig {
                                 "/auth/login/**",
                                 "/auth/register",
 
-                                // ✅ Swagger UI & OpenAPI (semua versi)
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/v3/api-docs/**",
@@ -47,7 +46,7 @@ public class SecurityConfig {
                                 "/configuration/security"
                         ).permitAll()
 
-                        // ✅ Semua route lain butuh autentikasi JWT
+                        // Semua route lain butuh autentikasi JWT
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex
@@ -55,7 +54,7 @@ public class SecurityConfig {
                         .accessDeniedHandler(accessDeniedConfig)
                 )
 
-                // ✅ Tambahkan filter JWT authentication
+                // Tambahkan filter JWT authentication
                 .addFilterBefore(jwtAuthenticationConfig, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

@@ -31,6 +31,8 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
+    // @AuthenticationPrincipal adalah anotasi Spring Security yang menyuntikkan principal
+    // (objek yang mewakili user yang sudah terautentikasi) ke parameter method.
     public BaseResponse<?> logout(@AuthenticationPrincipal UserLoggedInConfig userLogout){
         var userLoggedIn =userLogout.getUser();
         authService.logout(userLoggedIn);
