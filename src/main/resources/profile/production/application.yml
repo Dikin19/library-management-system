@@ -43,11 +43,6 @@ springdoc:
     url: /api-docs # Swagger langsung ambil /api-docs tanpa isi manual
     display-request-duration: true # opsional, tampilkan waktu respon tiap request
     defaultModelsExpandDepth: -1 # Sembunyikan schemas
-#    defaultModelExpandDepth: -1 # Sembunyikan model details
-#    showExtensions: false # Hilangkan extensions
     docExpansion: none # Collapse semua sections
-#    custom-css-path: /swagger-ui-custom.css # Custom CSS untuk hide schemas
-#  packages-to-scan: com.system.management.library
-#  paths-to-match: /**
     tagsSorter: alpha
     operationsSorter: alpha
