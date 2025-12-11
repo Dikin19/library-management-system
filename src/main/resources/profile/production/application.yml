@@ -2,10 +2,14 @@ server:
   port: 8080
 
 spring:
+  profiles:
+    active: production  # ← profil aktif
+
   datasource:
     url: jdbc:postgresql://dpg-d4t669vdiees73asdhsg-a.singapore-postgres.render.com:5432/librarymanagement_cs88?sslmode=require
     username: library_management_db
     password: KqzjgAFHykBUEFWiFXTUSDBSMQd5GrXv
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
@@ -15,8 +19,6 @@ spring:
       hibernate:
         format_sql: true
         enable_lazy_load_no_trans: true
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 jwt:
   secret: ${JWT_SECRET:your-very-strong-secret-key-for-jwt-256-bit-2025-production}
@@ -26,17 +28,16 @@ logging:
   level:
     com.system.management.library.aplikasi.book.management: TRACE
 
-
 springdoc:
   api-docs:
-    enabled: ${SWAGGER_ENABLED:true} # aktif hanya jika SWAGGER_ENABLED=true
-    path: /api-docs # ubah jadi /api-docs biar lebih rapi
+    enabled: ${SWAGGER_ENABLED:true}
+    path: /api-docs
   swagger-ui:
     enabled: ${SWAGGER_ENABLED:true}
-    path: /swagger-ui.html # endpoint UI utama
-    url: /api-docs # Swagger langsung ambil /api-docs tanpa isi manual
-    display-request-duration: true # opsional, tampilkan waktu respon tiap request
-    defaultModelsExpandDepth: -1 # Sembunyikan schemas
-    docExpansion: none # Collapse semua sections
+    path: /swagger-ui.html
+    url: /api-docs
+    display-request-duration: true
+    defaultModelsExpandDepth: -1
+    docExpansion: none
     tagsSorter: alpha
     operationsSorter: alpha
