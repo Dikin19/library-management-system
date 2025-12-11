@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: production  # ← profil aktif
+
+  datasource:
+    url: jdbc:postgresql://dpg-d4t669vdiees73asdhsg-a.singapore-postgres.render.com:5432/librarymanagement_cs88?sslmode=require
+    username: library_management_db
+    password: KqzjgAFHykBUEFWiFXTUSDBSMQd5GrXv
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        enable_lazy_load_no_trans: true
+
+jwt:
+  secret: ${JWT_SECRET:your-very-strong-secret-key-for-jwt-256-bit-2025-production}
+  expiration: ${JWT_EXPIRATION:3600000}
+
+logging:
+  level:
+    com.system.management.library.aplikasi.book.management: TRACE
+
+springdoc:
+  api-docs:
+    enabled: ${SWAGGER_ENABLED:true}
+    path: /api-docs
+  swagger-ui:
+    enabled: ${SWAGGER_ENABLED:true}
+    path: /swagger-ui.html
+    url: /api-docs
+    display-request-duration: true
+    defaultModelsExpandDepth: -1
+    docExpansion: none
+    tagsSorter: alpha
+    operationsSorter: alpha
