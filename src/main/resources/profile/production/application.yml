@@ -3,13 +3,10 @@ server:
 
 spring:
   datasource:
-    #    url: jdbc:postgresql://localhost:5432/LibraryManagementSystem #posgreSQL
-    #    url: jdbc:postgresql://host.docker.internal:5432/LibraryManagementSystem #docker
-    url: jdbc:postgresql://dpg-d4t669vdiees73asdhsg-a.singapore-postgres.render.com:5432/librarymanagement_cs88
+    url: jdbc:postgresql://dpg-d4t669vdiees73asdhsg-a.singapore-postgres.render.com:5432/librarymanagement_cs88?sslmode=require
     username: library_management_db
-    #    username: postgres
-    #    password: postgres
     password: KqzjgAFHykBUEFWiFXTUSDBSMQd5GrXv
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -20,11 +17,7 @@ spring:
         enable_lazy_load_no_trans: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  profiles:
-    active: production
 
-# JWT Configuration
-# 1 hour in milliseconds
 jwt:
   secret: ${JWT_SECRET:your-very-strong-secret-key-for-jwt-256-bit-2025-production}
   expiration: ${JWT_EXPIRATION:3600000}
@@ -32,6 +25,7 @@ jwt:
 logging:
   level:
     com.system.management.library.aplikasi.book.management: TRACE
+
 
 springdoc:
   api-docs:
